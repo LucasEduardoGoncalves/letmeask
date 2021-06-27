@@ -9,7 +9,7 @@ import { useAuth } from '../hooks/auth';
 
 import { ContainerHome } from '../styles/styles';
 
-import { Button } from '../components/button';
+import { Button } from '../components/Button';
 import { database } from '../services/firebase';
 
 export function Home() {

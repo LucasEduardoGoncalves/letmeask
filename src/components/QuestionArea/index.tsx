@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { QuestionsArea } from '../styles/stylesComponents';
+import { Container } from './styles';
 
 type QuestionProps = {
     content: string;
@@ -14,7 +14,7 @@ type QuestionProps = {
 
 export function QuestionArea({content, author, children, isHighlighted = false, isAnswer = false}: QuestionProps) {
     return (
-        <QuestionsArea className={`${isHighlighted ? 'highlighted' : ''} ${isAnswer ? 'answer' : ''}`}>
+        <Container className={`${isHighlighted ? 'highlighted' : ''} ${isAnswer ? 'answer' : ''}`}>
             <p>{content}</p>
             <footer>
                 <div className="user-info">
@@ -23,6 +23,6 @@ export function QuestionArea({content, author, children, isHighlighted = false, 
                 </div>
                 <div className="children">{children}</div>
             </footer>
-        </QuestionsArea>
+        </Container>
     )
 }

@@ -7,7 +7,7 @@ import illustration from '../assets/illustration.svg';
 import logoimg from '../assets/logo.svg';
 
 import { ContainerHome } from '../styles/styles';
-import { Button } from '../components/button';
+import { Button } from '../components/Button';
 
 import { database } from '../services/firebase';
 
@@ -16,6 +16,7 @@ export function NewRoom() {
     const { user } = useAuth();
     const history = useHistory();
 
+    
     const [newRoom, setNewRoom] = useState('');
     
     async function handleCreateRoom(event: FormEvent) {
@@ -32,7 +33,7 @@ export function NewRoom() {
             authorId: user?.id,
         });
 
-        history.push(`/admin/rooms/${firebaseRooms.key}`);
+        history.push(`/rooms/${firebaseRooms.key}`);
     }
 
     return(

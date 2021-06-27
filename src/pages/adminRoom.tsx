@@ -2,17 +2,17 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { PageRoom } from '../styles/styles';
 
-import { Button } from '../components/button'
+import { Button } from '../components/Button'
 
 import logoimg from '../assets/logo.svg';
 import deleteImg from '../assets/delete.svg';
 import checkImg from '../assets/check.svg';
 import answer from '../assets/answer.svg';
 
-import { RoomCode } from '../components/roomCode';
+import { CopyRoomCode } from '../components/CopyCode';
 // import { useAuth } from '../hooks/auth';
 
-import { QuestionArea } from '../components/question';
+import { QuestionArea } from '../components/QuestionArea';
 import { useRoom } from '../hooks/useRoom';
 import { database } from '../services/firebase';
 
@@ -61,7 +61,7 @@ export function AdminRoom() {
                 <div className="content">
                     <img src={logoimg} alt="LetMeAsk" />
                     <div>
-                        <RoomCode code={roomId}/>
+                        <CopyRoomCode code={roomId}/>
                         <Button onClick={handleEndRoom} isOutlined>Encerrar sala</Button>
                     </div>
                 </div>

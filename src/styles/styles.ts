@@ -240,7 +240,7 @@ export const PageRoom = styled.div`
 
         form {
 
-            textarea {
+            input {
                 width: 100%;
                 height: 6rem;
                 border: 0;
@@ -310,6 +310,21 @@ export const PageRoom = styled.div`
 
             display: flex;
             flex-direction: column-reverse;
+
+            .emptyQuestion{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                h2 {
+                    margin: 1rem;
+                    font: 700 1.5rem 'Poppins', sans-serif;
+                }
+
+                p {
+                    color: #737880;
+                }
+            }
         }
     }
 `;
