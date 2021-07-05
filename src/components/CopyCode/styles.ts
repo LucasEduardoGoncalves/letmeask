@@ -1,19 +1,18 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
 
 export const Container = styled.button`
     height: 2.5rem;
     border-radius: 0.5rem;
     overflow: hidden;
 
-    background: #fff;
-    border: 1px solid #835afd;
+    background: ${props => props.theme.copyCode.background};
+    border: 1px solid ${props => props.theme.copyCode.borderColor};
 
     cursor: pointer;
     display: flex;
 
     div {
-        background: #835afd;
+        background: ${props => props.theme.copyCode.div.background};
         padding: 0 0.8rem;
 
         display: flex;
@@ -22,10 +21,10 @@ export const Container = styled.button`
         align-items: center;  
         height: 100%;  
 
-        transition: background-color 0.2s;
+        /* transition: background-color 0.2s; */
 
         svg {
-            color: #fff;
+            color: ${props =>props.theme.copyCode.div.color};
         }
     }
 
@@ -33,6 +32,7 @@ export const Container = styled.button`
         display: block;
         align-self: center;
         flex: 1;
+        color: ${props => props.theme.copyCode.colorText};
 
         padding: 0 1rem 0 0.8rem;
         width: 12rem;
@@ -40,12 +40,14 @@ export const Container = styled.button`
         font-weight: 500;
         font-size: 0.8rem;
         
-        transition: background-color 0.2s;
+        /* transition: background-color 0.2s; */
     }
 
     &:hover {
         div {
-            background: ${shade(0.2, '#835afd')};
+            background: ${props => props.theme.copyCode.hover.background};
         }
+
+        border-color: ${props => props.theme.copyCode.hover.background}
     }
 `;

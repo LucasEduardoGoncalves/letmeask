@@ -1,20 +1,26 @@
 import { FormEvent, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useAuth } from '../hooks/auth';
+import { useAuth } from '../../hooks/auth';
 
-import illustration from '../assets/illustration.svg';
-import logoimg from '../assets/logo.svg';
+import illustration from '../../assets/illustration.svg';
+import logoimg from '../../assets/logoLigth.svg';
+import logoimgDark from '../../assets/logoDark.svg';
 
-import { ContainerHome } from '../styles/styles';
-import { Button } from '../components/Button';
+import { Container } from './styles';
+import { Button } from '../../components/Button';
 
-import { database } from '../services/firebase';
+import { database } from '../../services/firebase';
+
+import { useTheme } from '../../hooks/useTheme';
 
 export function NewRoom() {
 
     const { user } = useAuth();
     const history = useHistory();
+
+    const { theme } = useTheme();
+    
 
     
     const [newRoom, setNewRoom] = useState('');
@@ -37,7 +43,7 @@ export function NewRoom() {
     }
 
     return(
-        <ContainerHome>
+        <Container>
             <aside>
                 <img src={illustration} alt="Ilustração simbolizando perguntas e respostas"/>
                 <strong>Crie salas de Q&amp;A ao-vivo</strong>
@@ -46,7 +52,7 @@ export function NewRoom() {
 
             <main>
                 <section>
-                    <img src={logoimg} alt="Imagem da logo"/>
+                {theme.title === 'light' ? <img src={logoimg} alt="LetMeAsk"/> : <img src={logoimgDark} alt="LetMeAsk"/>}
                     <h2>Criar uma nova sala</h2>
 
                     <form onSubmit={handleCreateRoom}>
@@ -65,6 +71,6 @@ export function NewRoom() {
                     <p>Quer entrar em uma sala já existente? <Link to="/" >Clique aqui</Link></p>
                 </section>
             </main>
-        </ContainerHome>
+        </Container>
     )
 }

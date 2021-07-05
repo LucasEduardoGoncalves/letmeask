@@ -1,22 +1,28 @@
 import { FormEvent, useState } from 'react';
 
-import illustration from '../assets/illustration.svg';
-import logoimg from '../assets/logo.svg';
-import google from '../assets/google-icon.svg'; 
+import illustration from '../../assets/illustration.svg';
+import logoimg from '../../assets/logoLigth.svg';
+import logoimgDark from '../../assets/logoDark.svg';
+import google from '../../assets/google-icon.svg'; 
 
 import { useHistory } from 'react-router-dom';
-import { useAuth } from '../hooks/auth';
+import { useAuth } from '../../hooks/auth';
 
-import { ContainerHome } from '../styles/styles';
+import { Container } from './styles';
 
-import { Button } from '../components/Button';
-import { database } from '../services/firebase';
+import { Button } from '../../components/Button';
+import { database } from '../../services/firebase';
+
+import { useTheme } from '../../hooks/useTheme';
+
+
 
 export function Home() {
 
     const history = useHistory();
     const { user, signInWithGoogle } = useAuth();
     const [roomCode, setRoomCode] = useState('');
+    const { theme } = useTheme();
 
     async function createNewRoom() {
         if(!user){
@@ -49,7 +55,7 @@ export function Home() {
     }
 
     return(
-        <ContainerHome>
+        <Container>
             <aside>
                 <img src={illustration} alt="Ilustração simbolizando perguntas e respostas"/>
                 <strong>Crie salas de Q&amp;A ao-vivo</strong>
@@ -58,7 +64,7 @@ export function Home() {
 
             <main>
                 <section>
-                    <img src={logoimg} alt="Imagem da logo"/>
+                {theme.title === 'light' ? <img src={logoimg} alt="LetMeAsk"/> : <img src={logoimgDark} alt="LetMeAsk"/>}
 
                     <button onClick={createNewRoom} className="create-room" type="button">
                         <img src={google} alt="Imagem do Google"/>
@@ -81,6 +87,6 @@ export function Home() {
                     </form>
                 </section>
             </main>
-        </ContainerHome>
+        </Container>
     )
 }

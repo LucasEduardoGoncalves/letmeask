@@ -5,7 +5,8 @@ export const Container = styled.div`
 
     span{
         width: 160px;
-        background: #835afd;
+        background: ${props => props.theme.sideBar.background};
+        color:  ${props => props.theme.sideBar.colorText};
         padding: 8px;
         border-radius: 4px;
         font-size: 14px;
@@ -24,7 +25,7 @@ export const Container = styled.div`
         &::before{
             content: '';
             border-style: solid;
-            border-color: #835afd transparent;
+            border-color: ${props => props.theme.sideBar.background} transparent;
             border-width: 6px 6px 0 6px;
             top: 100%;
             position: absolute;

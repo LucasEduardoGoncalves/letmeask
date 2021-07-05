@@ -33,7 +33,7 @@ export const Container = styled.div`
     padding: 1.5rem;
     box-sizing: border-box;
     border-radius: 1rem;
-    background-color: #fff;
+    background-color: ${props => props.theme.modal.background};
     cursor: auto;
 }
 

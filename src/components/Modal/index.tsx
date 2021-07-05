@@ -8,7 +8,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
- const Modal: React.FC< ModalProps>= ({ isOpen , onClose , children }) => {
+ export const Modal: React.FC< ModalProps>= ({ isOpen , onClose , children }) => {
   const overlayRef = React.useRef(null);
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -43,5 +43,3 @@ interface ModalProps {
   </Container>
 ) : null;
 };
-
-export default Modal;

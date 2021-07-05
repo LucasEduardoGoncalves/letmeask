@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { shade } from 'polished';
 
 export const Trash = styled.div`
     display: flex;
@@ -9,7 +8,7 @@ export const Trash = styled.div`
     margin: 2rem;
 
     svg {
-        color: red;
+        color: ${props => props.theme.modal.svg};
         margin: 0.5rem 1rem 1rem 1rem;
         font-size: 2.5rem;
     }
@@ -17,11 +16,12 @@ export const Trash = styled.div`
     h2 {
         font: 700 1.5rem 'Poppins', sans-serif;
         margin-bottom: 1rem;
+        color: ${props => props.theme.modal.h2}
     }
 
     p {
         margin: 1rem;
-        color: #737880;
+        color: ${props => props.theme.modal.p};
     }
 
     div {
@@ -35,16 +35,16 @@ export const Trash = styled.div`
             border: 0;
             border-radius: 0.5rem;
             width: 50%;
-            color: #737880;
+            color:${props => props.theme.modal.button.button1.color};
 
             padding: 1rem;
             font: 700 1rem 'Poppins', sans-serif;
-            background: #ccc;
+            background: ${props => props.theme.modal.button.button1.background};
 
             transition: background-color 0.2s;
 
             &:hover {
-                background: ${shade(0.2, '#ccc')}
+                background: ${props => props.theme.modal.button.button1.backgroundHover}
             }
         }
 
@@ -52,16 +52,16 @@ export const Trash = styled.div`
             border: 0;
             border-radius: 0.5rem;
             width: 50%;
-            color: #fff;
+            color: ${props => props.theme.modal.button.button2.color};
 
             padding: 1rem;
             font: 700 1rem 'Poppins', sans-serif;
-            background: #E73F5D;
+            background: ${props => props.theme.modal.button.button2.background};
 
             transition: background-color 0.2s;
 
             &:hover {
-                background: ${shade(0.4, '#E73F5D')}
+                background: ${props => props.theme.modal.button.button2.backgroundHover};
             }
         }
     }

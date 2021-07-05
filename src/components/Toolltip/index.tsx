@@ -7,7 +7,7 @@ interface TooltioProps{
     className?: string;
 }
 
-const Tooltip: React.FC<TooltioProps> = ({title, className = '', children}) => {
+export const Tooltip: React.FC<TooltioProps> = ({title, className = '', children}) => {
     return(
         <Container className={className}>
             {title !== '' && (<>{children}</>)}
@@ -15,5 +15,3 @@ const Tooltip: React.FC<TooltioProps> = ({title, className = '', children}) => {
         </Container>     
     )
 };
-
-export default Tooltip;

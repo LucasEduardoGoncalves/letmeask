@@ -14,6 +14,7 @@ type QuestionProps = {
 
 export function QuestionArea({content, author, children, isHighlighted = false, isAnswer = false}: QuestionProps) {
     return (
+    <>
         <Container className={`${isHighlighted ? 'highlighted' : ''} ${isAnswer ? 'answer' : ''}`}>
             <p>{content}</p>
             <footer>
@@ -24,5 +25,6 @@ export function QuestionArea({content, author, children, isHighlighted = false, 
                 <div className="children">{children}</div>
             </footer>
         </Container>
+    </>
     )
 }

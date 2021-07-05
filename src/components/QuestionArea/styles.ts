@@ -13,7 +13,7 @@ const appearFromBottom = keyframes`
 `;
 
 export const Container = styled.div`
-    background: #fefefe;
+    background:  ${props => props.theme.colors.blocosInput.background};
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 
     border-radius: 0.5rem;
@@ -24,18 +24,18 @@ export const Container = styled.div`
     animation: ${appearFromBottom} 1s;
 
     p {
-        color: #29292e;
+        color:  ${props => props.theme.colors.text};
     }
 
     &.highlighted {
-        background-color: #f4f0ff;
-        border: 1px solid #835afd;
+        background-color:  ${props => props.theme.colors.blocosInput};
+        border: 1px solid  ${props => props.theme.colors.blocosInput};
     }  
 
     &.answer {
-        background: #ccc;
+        background: ${props => props.theme.colors.blocosInput};
         border: 0;
-        color: #ccc;
+        color: ${props => props.theme.colors.blocosInput};
     } 
    
     footer {
@@ -59,7 +59,7 @@ export const Container = styled.div`
             p {
                 margin-left: 0.5rem;
                 font-size: 0.8rem;
-                color: #29292e;
+                color: ${props => props.theme.colors.text};
                 font-weight: 500;
             }
         }
@@ -70,7 +70,7 @@ export const Container = styled.div`
             align-items: center;
 
             .trash {
-                color: #737380;
+                color: ${props => props.theme.colors.text};
                 padding-top: 1px;
             }
         }
@@ -83,16 +83,16 @@ export const Container = styled.div`
             &.like-button {
                 display: flex;
                 align-items: flex-end;
-                color: #737380;
+                color: ${props => props.theme.colors.text};
 
                 gap: 0.5em;
                
             }
             &.liked {
-                color: #835afd;
+                color: red;
 
                 svg path {
-                    stroke: #835afd;
+                    stroke: ${props => props.theme.colors.button};
                 }
             }
         }
