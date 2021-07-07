@@ -16,7 +16,7 @@ export function QuestionArea({content, author, children, isHighlighted = false, 
     return (
     <>
         <Container className={`${isHighlighted ? 'highlighted' : ''} ${isAnswer ? 'answer' : ''}`}>
-            <p>{content}</p>
+            <textarea readOnly>{content}</textarea>
             <footer>
                 <div className="user-info">
                     <img src={author.avatar} alt={author.name} />

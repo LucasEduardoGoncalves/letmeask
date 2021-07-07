@@ -9,8 +9,6 @@ type RoomCodeProps = {
     code: string;
 }
 
-
-
 export function CopyRoomCode (props: RoomCodeProps) {
 
     const { theme } = useTheme();
@@ -27,14 +25,11 @@ export function CopyRoomCode (props: RoomCodeProps) {
           primary: `${theme.toast.icon.cor1}`,
           secondary: `${theme.toast.icon.cor2}`,
         }
-
-        //${theme.sideBar.background}
-        //${theme.colors.background}
-
     });
 
     function copyRoomCodeToClipeBoard() {
-        navigator.clipboard.writeText(props.code)
+        navigator.clipboard.writeText(props.code);
+        notify();
     }
 
     return (
@@ -42,7 +37,7 @@ export function CopyRoomCode (props: RoomCodeProps) {
             <Container onClick={copyRoomCodeToClipeBoard}>
                 
                 <div>
-                    <BiCopy size={25} onClick={notify}/>
+                    <BiCopy size={25} />
                 </div>
                 <span>{props.code}</span>
             </Container>

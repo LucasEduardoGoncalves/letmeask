@@ -15,8 +15,6 @@ import { database } from '../../services/firebase';
 
 import { useTheme } from '../../hooks/useTheme';
 
-
-
 export function Home() {
 
     const history = useHistory();

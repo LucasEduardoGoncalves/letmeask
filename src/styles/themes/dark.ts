@@ -1,4 +1,4 @@
-export default{
+const dark = {
     title: 'dark',
 
     colors: {
@@ -103,5 +103,28 @@ export default{
                 backgroundHover: '#6c757d'
             }
         }
-    }
+    },
+
+    modalFeedBack: {
+        color: '#adb5bd',
+        backgroundHover: '#343a40'
+    },
+
+    modalFeedBackHelp: {
+        h2: '#adb5bd',
+        textarea: {
+            color: '#adb5bd',
+            placeholder: '#adb5bd',
+            border: '#adb5bd',           
+        },
+        button: {
+            color:'#343a40',
+            border: '#adb5bd',
+            borderHover: '#6c757d',
+            background: '#adb5bd',
+            backgroundHover: '#6c757d',
+        }
+    } 
 };
+
+export default dark;

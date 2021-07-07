@@ -1,4 +1,4 @@
-export default {
+const light = {
     title: 'light',
 
     colors: {
@@ -103,5 +103,28 @@ export default {
                 backgroundHover: '#E21C40'
             }
         }
-    }
+    },
+
+    modalFeedBack: {
+        color: '#737380',
+        backgroundHover: '#ccc'
+    },
+
+    modalFeedBackHelp: {
+        h2: '#835afd',
+        textarea: {
+            color: '#343a40',
+            placeholder: '#ccc',
+            border: '#835afd',           
+        },
+        button: {
+            color:'#835afd',
+            border: '#835afd',
+            borderHover: '#835afd',
+            background: '#fff',
+            backgroundHover: '#ccc',
+        }
+    } 
 };
+
+export default light;

@@ -16,7 +16,6 @@ export const ContainerButton = styled.button`
     border: 0;
 
     transition: background-color 0.2s ;
-    transition: color 0.2s ;
 
     img {
         margin-right: 0.5rem;

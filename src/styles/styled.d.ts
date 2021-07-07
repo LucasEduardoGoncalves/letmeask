@@ -103,6 +103,27 @@ declare module 'styled-components' {
                     backgroundHover: string
                 }
             }
-        }
+        },
+
+        modalFeedBack: {
+            color: string,
+            backgroundHover: string
+        },
+
+        modalFeedBackHelp: {
+            h2: string,
+            textarea: {
+                color: string,
+                placeholder: string,
+                border: string,           
+            },
+            button: {
+                color: string,
+                border: string,
+                borderHover: string,
+                background: string,
+                backgroundHover: string,
+            }
+        }        
     };
 }

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import logoimg from '../../assets/logoLigth.svg';
 import logoimgDark from '../../assets/logoDark.svg';
 
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiOutlineCheck } from 'react-icons/ai';
 import { BiMessageSquareDetail } from 'react-icons/bi';
 import { TiDeleteOutline } from 'react-icons/ti'
 import { CgTrash } from 'react-icons/cg';
@@ -24,7 +24,6 @@ import { useRoom } from '../../hooks/useRoom';
 
 import { database } from '../../services/firebase';
 import { useTheme } from '../../hooks/useTheme';
-
 
 type RoomParams = {
     id: string;
@@ -96,44 +95,22 @@ export function Room() {
           await  signInWithGoogle();
         }
     };
+
     return (
         <>
         <Container>
             <Conteudo>
                 <Header>
-                    <div className="content" >
-                        {theme.title === 'light' ? <img src={logoimg} alt="LetMeAsk"/> : <img src={logoimgDark} alt="LetMeAsk"/>}
-                        
-                        <CopyRoomCode  code={roomId}/>
+                    {theme.title === 'light' ? <img src={logoimg} alt="LetMeAsk"/> : <img src={logoimgDark} alt="LetMeAsk"/>}                    
+
+                    <div className="title">
+                        <h1>{title}</h1> 
+                        <div>--</div>  
+                        <CopyRoomCode  code={roomId}/>         
                     </div>
                 </Header>
                 
-                <section>
-                    <div className="div-title">
-                        <h1> - {title} -</h1>
-                        {/* {questions.length > 1 && <span>{questions.length} perguntas</span>} */}               
-                    </div>
-
-                    <form onSubmit={handleSendQuestion}>
-                        <input 
-                        onChange={event => setNewQuestion(event.target.value)}
-                        value={newQuestion}
-                        placeholder="Envie uma mensagem..."
-                        />
-
-                        <div>
-                            { user ? (
-                                <div className="user-info"> 
-                                    <img src={user.avatar} alt={user.id}/>
-                                    <span>{user.name}</span>
-                                </div>
-                            ) : (
-                                <p>Para enviar uma mensagem, <button onClick={newLogin}>Faça seu login</button>.</p>
-                            )}
-                            <Button type="submit" disabled={!user}>Enviar mensagem</Button>
-                        </div>
-                    </form>
-                    
+                <main>
                     <div className="question-list">
                         { questions.length === 0 ? (
 
@@ -154,7 +131,6 @@ export function Room() {
                                 >
                                     {!question.isAnswer && 
                                     <>  
-
                                         {question.author.name === user?.name && 
                                             <Tooltip title="Apagar mensagem">
                                                 <CgTrash size={25} className="trash" onClick={() => setQuestionFunction(question.id)}/>
@@ -179,6 +155,24 @@ export function Room() {
                             )
                         })}                   
                     </div>
+                </main>
+
+                <section>             
+                    <form onSubmit={handleSendQuestion}>
+                        { user ? (
+                            <img src={user.avatar} alt={user.id}/>
+                        ) : (
+                            <p>Para enviar uma mensagem, <button onClick={newLogin}>Faça seu login</button>.</p>
+                        )}                  
+
+                        <input 
+                        onChange={event => setNewQuestion(event.target.value)}
+                        value={newQuestion}
+                        placeholder="Envie uma mensagem..."
+                        />
+
+                        <Button type="submit" disabled={!user}><AiOutlineCheck/></Button>        
+                    </form>
                 </section>
             </Conteudo>
             <SideBar/>

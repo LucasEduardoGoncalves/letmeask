@@ -44,11 +44,12 @@ export function useRoom(roomId: string) {
                 return {
                     id: key,
                     content: value.content,
+                    
                     author: value.author,
                     isHighlighted: value.isHighlighted,
                     isAnswer: value.isAnswer,
                     likeCount: Object.values(value.likes ?? {}).length,
-                    likeId: Object.entries(value.likes ?? {}).find(([key, like]) => like.authorId === user?.id)?.[0],
+                    likeId: Object.entries(value.likes ?? {}).find(([key, like]) => like.authorId === user?.id)?.[0],               
                 }
             });
 
@@ -61,6 +62,6 @@ export function useRoom(roomId: string) {
         }
     }, [roomId, user?.id])
 
-    return { questions, title}
+    return {questions, title}
 
 }

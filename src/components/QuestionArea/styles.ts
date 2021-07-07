@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components'
 const appearFromBottom = keyframes`
     from {
         opacity: 0;
-        transform: translatey(-100px);
+        transform: translatex(-50px);
     }
 
     to {
@@ -23,8 +23,19 @@ export const Container = styled.div`
 
     animation: ${appearFromBottom} 1s;
 
-    p {
+    textarea {
         color:  ${props => props.theme.colors.text};
+        width: 100%;
+        border: 0;
+        background: transparent;
+        resize: none;
+        outline: none;
+
+        max-height: 50rem;
+
+        ::-webkit-scrollbar {
+            width: 0;
+        }
     }
 
     &.highlighted {

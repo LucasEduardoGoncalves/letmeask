@@ -30,11 +30,7 @@ interface ModalProps {
         {/* <div className="modal__close-btn">
           <button className="modal__close-btn" onClick={onClose}>X</button>
         </div> */}
-
-        {/* <div className="modal__title">
-          {title}
-        </div> */}
-
+        
         <div className="modal__content">
           {children}
         </div>

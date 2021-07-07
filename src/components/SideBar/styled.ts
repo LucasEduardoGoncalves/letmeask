@@ -16,6 +16,16 @@ export const Container = styled.div`
     &:hover {
         width: 18rem;
 
+        .arrow {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        opacity: 0;
+
+        /* right: 1rem; */
+        top: 50%;
+    }
+
         header {
             opacity: 1;
             display: flex;
@@ -40,9 +50,12 @@ export const Container = styled.div`
             button {
                 height: 3rem;
             }
+            
             div, a, button{
+                opacity: 1;
                 color: ${props => props.theme.sideBar.colorText};
                 text-decoration: none;
+                background: transparent;
 
                 display: flex;
                 align-items: center;
@@ -54,8 +67,6 @@ export const Container = styled.div`
                 font-size: 1rem;
 
                 border: 0;
-
-                /* transition: background-color 0.2s; */
 
                 svg {
                     color: ${props => props.theme.sideBar.colorText};
@@ -74,6 +85,15 @@ export const Container = styled.div`
                 }
             }
         }
+    }
+
+    .arrow {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        opacity: 1;
+        top: 50%;
+        font-size: 2rem;
     }
 
     header {
@@ -95,9 +115,7 @@ export const Container = styled.div`
     }
 
     div, a, button {
-        color: transparent;
-        background: transparent;
-        border: 0;
+        opacity: 0;  
     }
 
 `;

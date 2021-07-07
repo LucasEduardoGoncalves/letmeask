@@ -5,6 +5,7 @@ import { Home } from './pages/Home/home';
 import { NewRoom } from './pages/NewRoom/newRoom';
 import { Room } from './pages/Room/room';
 import { AdminRoom } from './pages/AdminRoom/adminRoom';
+import { FeedBack } from './pages/FeedBack';
 
 import { AuthContextProvider } from './hooks/auth';
 import light from './styles/themes/ligth';
@@ -23,6 +24,7 @@ function App() {
                 <Route path='/' exact component={Home}/>
                 <Route path='/rooms/new' exact component={NewRoom}/>
                 <Route path='/rooms/:id' component={Room}/>
+                <Route path='/feedback' component={FeedBack}/>
 
                 <Route path='/admin/rooms/:id' component={AdminRoom}/>
               </Switch>

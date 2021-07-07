@@ -10,7 +10,6 @@ import checkImg from '../../assets/check.svg';
 import answer from '../../assets/answer.svg';
 
 import { CopyRoomCode } from '../../components/CopyCode';
-// import { useAuth } from '../hooks/auth';
 
 import { QuestionArea } from '../../components/QuestionArea';
 import { useRoom } from '../../hooks/useRoom';
@@ -25,7 +24,6 @@ export function AdminRoom() {
     const params = useParams<RoomParams>()
     const roomId = params.id;
     
-    // const { user } = useAuth();
     const { questions, title } = useRoom(roomId); 
     const history = useHistory();
 
@@ -70,8 +68,7 @@ export function AdminRoom() {
             <section>
                 <div className="div-title">
                     <h1> - {title} -</h1>
-                    {questions.length > 1 && <span>{questions.length} perguntas</span>}
-                    
+                    {questions.length > 1 && <span>{questions.length} perguntas</span>}                
                 </div>
                 
                 <div className="question-list">

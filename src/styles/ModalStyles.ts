@@ -66,3 +66,96 @@ export const Trash = styled.div`
         }
     }
 `;
+
+export const FeedBack = styled.div`
+    display: block;
+
+    > div, a {
+        display: flex;
+        align-items: center;
+        color: ${props => props.theme.modalFeedBack.color};
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+
+        text-decoration: none;
+        transition: background-color 0.2s;
+
+        svg {
+            font-size: 3rem;
+            margin-right: 1rem;
+        };
+
+        div {
+
+            h2 {
+                font-size: 1.3rem;
+                margin: 0.2rem;
+            };
+        };
+
+        &:hover {
+            background: ${props => props.theme.modalFeedBack.backgroundHover};
+        }
+    };
+`;
+
+export const FeedBackHelp = styled.div`
+    display: block;
+
+    h2 {
+        font-size: 1rem;
+        margin: 0.5rem;
+        color: ${props => props.theme.modalFeedBackHelp.h2};
+        font-weight: 200;
+    }
+
+    textarea {
+        width: 30rem;
+        height: 10rem;
+
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        margin: 0.5rem;
+        background: transparent;
+        border: 1px solid ${props => props.theme.modalFeedBackHelp.textarea.border}; 
+        color: ${props => props.theme.modalFeedBackHelp.textarea.color};
+        ::placeholder{
+            color: ${props => props.theme.modalFeedBackHelp.textarea.placeholder};
+        }
+
+        resize: none;
+        outline: none;
+    }
+
+     div {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        button {
+            padding: 0.5rem;
+            width: 6rem;
+            border-radius: 0.5rem;
+            background: transparent;
+
+            border: 1px solid ${props => props.theme.modalFeedBackHelp.button.border};
+
+            color: ${props => props.theme.modalFeedBackHelp.button.color};
+            background-color: ${props => props.theme.modalFeedBackHelp.button.background};
+
+            transition: background-color 0.2s;
+            transition: border-color 0.2s;
+
+            &:hover {
+                background: ${props => props.theme.modalFeedBackHelp.button.backgroundHover};
+                border-color: ${props => props.theme.modalFeedBackHelp.button.borderHover};
+            }
+        }
+    }
+`;
+
+export const Informações = styled.div`
+    
+
+`;

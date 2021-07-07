@@ -11,6 +11,8 @@ export const Container = styled.button`
     cursor: pointer;
     display: flex;
 
+    transition: border-color 0.2s;
+
     div {
         background: ${props => props.theme.copyCode.div.background};
         padding: 0 0.8rem;
@@ -21,7 +23,7 @@ export const Container = styled.button`
         align-items: center;  
         height: 100%;  
 
-        /* transition: background-color 0.2s; */
+        transition: background-color 0.2s;
 
         svg {
             color: ${props =>props.theme.copyCode.div.color};
@@ -40,7 +42,7 @@ export const Container = styled.button`
         font-weight: 500;
         font-size: 0.8rem;
         
-        /* transition: background-color 0.2s; */
+        transition: color 0.2s;
     }
 
     &:hover {
@@ -48,6 +50,9 @@ export const Container = styled.button`
             background: ${props => props.theme.copyCode.hover.background};
         }
 
-        border-color: ${props => props.theme.copyCode.hover.background}
+        border-color: ${props => props.theme.copyCode.hover.background};
+        span {
+            color: ${props => props.theme.copyCode.hover.background};
+        }
     }
 `;
