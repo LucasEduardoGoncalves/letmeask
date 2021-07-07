@@ -40,18 +40,4 @@ export const Container = styled.div`
 .modal__content{
     margin-top: 0.5rem;
 }
-
-.modal__close-btn{
-    background: transparent;
-    position: absolute;
-    top: 6px;
-    right: 10px;
-    border:none;
-    color: #9e25fc;
-    font-size:2rem;
-    
-    &:hover{
-        color: #731ab7;
-    }
-}
 `;

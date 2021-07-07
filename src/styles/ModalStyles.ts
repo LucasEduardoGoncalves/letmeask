@@ -87,6 +87,7 @@ export const FeedBack = styled.div`
         };
 
         div {
+            
 
             h2 {
                 font-size: 1.3rem;
@@ -153,9 +154,4 @@ export const FeedBackHelp = styled.div`
             }
         }
     }
-`;
-
-export const Informações = styled.div`
-    
-
 `;

@@ -26,10 +26,6 @@ interface ModalProps {
         className="modal__overlay" 
         onClick={handleOverlayClick}/>
         <div className="modal__box">
-
-        {/* <div className="modal__close-btn">
-          <button className="modal__close-btn" onClick={onClose}>X</button>
-        </div> */}
         
         <div className="modal__content">
           {children}

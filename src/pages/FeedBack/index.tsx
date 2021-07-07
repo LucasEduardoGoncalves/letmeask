@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 
 import { Container, Header, Conteudo, Feedback } from './styles';
 
-import svgError from '../../assets/404.svg';
+import svgErrorLigth from '../../assets/404Light.svg';
+import svgErrorDark from '../../assets/404Dark.svg';
 import logoimg from '../../assets/logoLigth.svg';
 import logoimgDark from '../../assets/logoDark.svg';
 
@@ -101,7 +102,7 @@ export const FeedBack = () => {
             </Container>
         ):
             <Container>
-                <img src={svgError} alt="error 404" className="error404"/>
+                {theme.title === 'light' ? <img src={svgErrorLigth} alt="404"/> : <img src={svgErrorDark} alt="404"/>}
             </Container> 
         }
     </>

@@ -19,16 +19,9 @@ export const ThemeContext = createContext({} as ThemeContextData);
 export function ThemeProvider({ children, defaultTheme }: ThemeProviderProps) {
 
   const [theme, setTheme] = useState(defaultTheme);
-
-  // useEffect(() => {
-  //   const response = localStorage.getItem("letmeask: theme");
-  //   const storage = response ? JSON.parse(response) : 'light';
-  //   setTheme(storage)
-  // }, []);
  
   const toggleTheme = () => {
-    setTheme(theme.title === "light" ? dark : light);
-    // localStorage.setItem("letmeask: theme", JSON.stringify(theme));     
+    setTheme(theme.title === "light" ? dark : light);  
   };
 
   return (

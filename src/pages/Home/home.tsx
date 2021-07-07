@@ -56,8 +56,8 @@ export function Home() {
         <Container>
             <aside>
                 <img src={illustration} alt="Ilustração simbolizando perguntas e respostas"/>
-                <strong>Crie salas de Q&amp;A ao-vivo</strong>
-                <p>Tire as dúvidas da sua audiencia em tempo real</p>
+                <strong>Crie salas de chat ao-vivo</strong>
+                <p>Converse com seus amigos em tempo real</p>
             </aside>
 
             <main>

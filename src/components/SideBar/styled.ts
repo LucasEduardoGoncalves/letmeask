@@ -21,9 +21,46 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         opacity: 0;
-
-        /* right: 1rem; */
         top: 50%;
+    }
+
+    .feedback {
+        &:hover {
+            background: #ccc;
+        }
+
+        &:not(:disabled):hover {
+            color: ${props => props.theme.sideBar.colorText};
+            text-decoration: none;
+            background: transparent;
+
+            display: flex;
+            align-items: center;
+            width: 100%;
+
+            padding: 0 1rem;
+            margin: 0.1rem 0;
+
+            font-size: 1rem;
+
+            border: 0;
+
+            svg {
+                color: ${props => props.theme.sideBar.colorText};
+                margin: 0 0.5rem;
+            }
+
+            &:hover {
+                background-color: ${props => props.theme.sideBar.hover.background};
+                color: ${props => props.theme.sideBar.hover.colorText};
+
+                border-right: 0.5rem solid ${props => props.theme.sideBar.background};
+
+                svg {
+                    color: ${props => props.theme.sideBar.hover.colorText};
+                }
+            }
+        }  
     }
 
         header {
@@ -46,6 +83,7 @@ export const Container = styled.div`
             display: block;
             line-height: 3rem;
             width: 100%;
+            
 
             button {
                 height: 3rem;

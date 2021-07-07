@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState, useEffect, useContext } from 'react';
+import { createContext, ReactNode, useState, useEffect, useContext, useCallback } from 'react';
 import { auth, firebase } from '../services/firebase';
 
 type User = {
@@ -10,6 +10,7 @@ type User = {
 type AuthContextType = {
     user: User | undefined;
     signInWithGoogle: () => Promise<void>;
+    signOut: () => void;
 }  
 
 type AuthContextProviderProps = {
@@ -46,6 +47,11 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
     return () => {
         unsubscribe();
     }
+    },[]);
+
+    const signOut = useCallback(async() =>{
+        await firebase.auth().signOut();
+        setUser(undefined);
     },[])
 
     async function signInWithGoogle() {
@@ -69,7 +75,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
     };
     
     return (
-        <AuthContext.Provider value={{user, signInWithGoogle}}>
+        <AuthContext.Provider value={{user, signInWithGoogle, signOut}}>
             {props.children}
         </AuthContext.Provider>
     )

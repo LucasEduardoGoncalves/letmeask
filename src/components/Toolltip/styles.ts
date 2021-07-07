@@ -4,6 +4,8 @@ export const Container = styled.div`
     position: relative;
 
     span{
+        display: flex;
+        justify-content: center;
         width: 160px;
         background: ${props => props.theme.sideBar.background};
         color:  ${props => props.theme.sideBar.colorText};

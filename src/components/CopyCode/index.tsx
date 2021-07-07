@@ -34,8 +34,7 @@ export function CopyRoomCode (props: RoomCodeProps) {
 
     return (
         <>
-            <Container onClick={copyRoomCodeToClipeBoard}>
-                
+            <Container onClick={copyRoomCodeToClipeBoard}>      
                 <div>
                     <BiCopy size={25} />
                 </div>
@@ -44,4 +43,4 @@ export function CopyRoomCode (props: RoomCodeProps) {
             <Toaster/>
         </>
     )
-}
+};

@@ -1,18 +1,18 @@
 import { useState, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { Container } from './styled';
-import { FeedBack, FeedBackHelp } from '../../styles/ModalStyles';
+import { FeedBack, FeedBackHelp, Trash } from '../../styles/ModalStyles';
 
 import { Modal } from '../Modal';
+import icon from '../../assets/iconDark.svg';
 
 import { FiSun, FiMoon, FiAlertTriangle } from 'react-icons/fi';
 import { RiFeedbackLine, RiArrowDropLeftLine } from 'react-icons/ri';
 import { BiMessageRoundedCheck } from 'react-icons/bi';
 import { CgFeed } from 'react-icons/cg';
-import { IoReturnDownBack } from 'react-icons/io5';
-import { BsGear } from 'react-icons/bs';
+import { IoReturnDownBack, IoExitOutline } from 'react-icons/io5';
 
 import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/auth';
@@ -20,8 +20,19 @@ import { useAuth } from '../../hooks/auth';
 import { database } from '../../services/firebase';
 
 export const SideBar = () => {
-    const { user } = useAuth();
+    const { user, signOut } = useAuth();
     const { theme, toggleTheme } = useTheme();
+    const  history = useHistory();
+
+    function logout() {
+        signOut();
+        toggleModalLogout();
+    };
+
+    function goToHome() {
+        history.push('/');
+        toggleModalHome();
+    };
 
     const notify = () => toast.success('Feedback enviado com sucesso',
     {
@@ -51,6 +62,16 @@ export const SideBar = () => {
     const toggleModalFeedBackTanks = () => {
         setModalFeedBackTanks(!modalFeedBackTanks);
         setModalFeedBack(false);
+    };
+
+    const [modalLogout, setModalLogout] = useState(false);
+    const toggleModalLogout = () => {
+        setModalLogout(!modalLogout)
+    };
+
+    const [modalHome, setModalHome] = useState(false);
+    const toggleModalHome = () => {
+        setModalHome(!modalHome)
     };
 
     const [newFeedback, setNewFeedback] = useState('');
@@ -89,10 +110,17 @@ export const SideBar = () => {
                 <RiArrowDropLeftLine/>         
             </div>
 
-            <header>
-                <img src={user?.avatar} alt="Seu avatar" />
-                <h4>{user?.name}</h4>              
-            </header>
+            {user ? 
+                <header>
+                    <img src={user?.avatar} alt="Seu avatar" />
+                    <h4>{user?.name}</h4>              
+                </header> 
+            : 
+                <header>
+                    <img src={icon} alt="Seu avatar" />
+                    <h4>Usuario não logado</h4>              
+                </header>
+            }
 
             <main>  
                 <button onClick={toggleTheme}>
@@ -100,22 +128,46 @@ export const SideBar = () => {
                     Temas
                 </button>
 
-                <Link to="/">
-                    <IoReturnDownBack/>
-                    Home
-                </Link>
-
-                <div>
-                    <BsGear/>
-                    Configurações
+                <div onClick={toggleModalLogout}>
+                    <IoExitOutline/>
+                    Logout
                 </div>
 
-                <button onClick={toggleModalFeedBack}>
+                <div onClick={toggleModalHome}>
+                    <IoReturnDownBack/>
+                    Home
+                </div>
+
+                <button className="feedback" disabled={!user} onClick={toggleModalFeedBack}>
                     <RiFeedbackLine/>
                     FeedBack
-                </button>
+                </button> 
             </main>
         </Container>
+
+        <Modal isOpen={modalHome} onClose={toggleModalHome}>
+            <Trash>
+            <IoReturnDownBack/>
+                <h2>Va para a home</h2>
+                <p>Tem certeza que quer voltar para a home?</p>
+                <div>
+                    <button onClick={toggleModalHome} className="cancelar">Cancelar</button>
+                    <button onClick={goToHome} className="confirmar">Confirmar</button>
+                </div>
+            </Trash>
+        </Modal>
+
+        <Modal isOpen={modalLogout} onClose={toggleModalLogout}>
+            <Trash>
+            <IoExitOutline/>
+                <h2>Logout</h2>
+                <p>Tem certeza que quer deslogar sua conta?</p>
+                <div>
+                    <button onClick={toggleModalLogout} className="cancelar">Cancelar</button>
+                    <button onClick={logout} className="confirmar">Confirmar</button>
+                </div>
+            </Trash>
+        </Modal>
 
         <Modal isOpen={modalFeedBack} onClose={toggleModalFeedBack}>
             <FeedBack>
@@ -152,7 +204,7 @@ export const SideBar = () => {
                 <form onSubmit={handleFeedback}>
                     <textarea 
                         name="message" 
-                        placeholder="Nos figa seu erro..." 
+                        placeholder="Nos diga seu erro..." 
                         onChange={event => setNewFeedback(event.target.value)}
                         value={newFeedback}
                     />

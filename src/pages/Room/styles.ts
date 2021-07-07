@@ -48,6 +48,7 @@ export const Conteudo = styled.main`
 
         height: 71%;
         max-width: 45rem;
+        padding: 3rem;
             
         ::-webkit-scrollbar {
             width: 0;
@@ -135,8 +136,9 @@ export const Conteudo = styled.main`
                 justify-content: space-between;
                 align-items: center;
                 margin-top: 1rem;
+            }
 
-                p {
+            p {
                     font-size: 0.8rem;
                     color:  ${props => props.theme.colors.text};;
 
@@ -153,7 +155,6 @@ export const Conteudo = styled.main`
                         cursor: pointer;
                     }
                 }
-            }
 
             button {
                 transition: background-color 0.2;
