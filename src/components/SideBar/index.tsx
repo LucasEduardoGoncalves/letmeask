@@ -7,6 +7,7 @@ import { FeedBack, FeedBackHelp, Trash } from '../../styles/ModalStyles';
 
 import { Modal } from '../Modal';
 import icon from '../../assets/iconDark.svg';
+import iconligh from '../../assets/icon.svg';
 
 import { FiSun, FiMoon, FiAlertTriangle } from 'react-icons/fi';
 import { RiFeedbackLine, RiArrowDropLeftLine } from 'react-icons/ri';
@@ -117,7 +118,7 @@ export const SideBar = () => {
                 </header> 
             : 
                 <header>
-                    <img src={icon} alt="Seu avatar" />
+                    {theme.title === 'light' ? <img src={iconligh} alt="Seu avatar" /> : <img src={icon} alt="Seu avatar" />}
                     <h4>Usuario não logado</h4>              
                 </header>
             }

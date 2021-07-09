@@ -162,7 +162,7 @@ export function Room() {
                         { user ? (
                             <img src={user.avatar} alt={user.id}/>
                         ) : (
-                            <p>Para enviar uma mensagem, <button onClick={newLogin}>Faça seu login</button>.</p>
+                            <p>Para enviar uma mensagem, <button onClick={newLogin}>Faça seu login</button></p>
                         )}                  
 
                         <input 
