@@ -1,6 +1,8 @@
 import { useState, FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 
+import ScrollToBottom from 'react-scroll-to-bottom';
+
 import logoimg from '../../assets/logoLigth.svg';
 import logoimgDark from '../../assets/logoDark.svg';
 
@@ -86,8 +88,8 @@ export function Room() {
             isAnswer: false
         };
 
-        await database.ref(`rooms/${roomId}/questions`).push(question);
         setNewQuestion('');
+        await database.ref(`rooms/${roomId}/questions`).push(question);   
     };
 
     async function newLogin() {
@@ -111,7 +113,7 @@ export function Room() {
                 </Header>
                 
                 <main>
-                    <div className="question-list">
+                    <ScrollToBottom className="question-list">
                         { questions.length === 0 ? (
 
                             <div className="emptyQuestion">
@@ -147,14 +149,14 @@ export function Room() {
                                         <Tooltip title="Dar amei">
                                             <AiOutlineHeart size={25}/>
                                         </Tooltip>
-                                            {question.likeCount > 1 && <span>{question.likeCount}</span>}
+                                            {question.likeCount > 0 && <span>{question.likeCount}</span>}
                                         </button>
                                     </>
                                     }                            
                                 </QuestionArea>
                             )
                         })}                   
-                    </div>
+                    </ScrollToBottom>
                 </main>
 
                 <section>             

@@ -40,4 +40,8 @@ export const ContainerButton = styled.button`
             color: ${props => props.theme.colors.buttonHover};
         }
     }
+
+    @media(max-width: 1000px){
+        max-height: 3rem;
+    }
 `;

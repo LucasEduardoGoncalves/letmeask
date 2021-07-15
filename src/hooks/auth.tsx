@@ -42,6 +42,8 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
                     name: displayName,
                     avatar: photoURL,
                 }) 
+
+                
             }
         })
     return () => {

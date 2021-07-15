@@ -1,168 +1,65 @@
 import styled from 'styled-components';
 
-export const Header = styled.div`
-    padding: 1.5rem;
-
-    border-bottom: 1px solid #ccc;
-
-    .content {
-        display: flex;
-        margin: 0 auto;
-        justify-content: space-between;
-
-        max-width: 73rem;
-        align-items: center;
-
-        img {
-            max-height: 4rem;
-        }  
-        
-        > div {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-
-            button {
-                height: 2rem;
-            }
-        }
-    } 
-`;
-
-export const PageRoom = styled.div`
-    width: 100%;
+export const Container = styled.div`
     display: flex;
-
-    height: 100vh;
     overflow: hidden;
 
-    .conteudo {
-        width: 100%;  
-    }
+    max-height: 100vh;
+    max-width: 100vw;
+`;
 
-    section {
-        height: 100%;
-        overflow: auto;
+export const Header = styled.div`
+    padding: 1.5rem;
+    border-bottom: 1px solid ${props => props.theme.sideBar.background};
 
-        max-width: 45rem;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+
+    align-items: center;
+
+    img {
+        max-height: 4rem;
+    }  
+    
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+
+            color: ${props => props.theme.colors.button};
+        }
+    }  
+`;
+
+export const Conteudo = styled.main`
+    width: 100%;
+
+    main {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;  
+
+        align-items: center;
+
+        width: 100%;
+
         margin: 0 auto;
 
-        padding: 0 3rem;
+        height: 71%;
 
+            
         ::-webkit-scrollbar {
             width: 0;
         }
 
-        .div-title {
-            display: flex;
-            align-items: center;
-
-            margin: 2rem 0 1.5rem;
-
-            h1 {
-                font-family: 'Poppins', sans-serif;
-                font-size: 1.5rem;
-
-                color: #29292e;
-            }
-
-            span {
-                margin-left: 1rem;
-                background: #e55ef9;
-
-                border-radius: 1rem;
-
-                padding: 0.5rem 1rem;
-                color: #fff;
-
-                font-weight: 500;
-                font-size: 1rem;
-            }
-        }
-
-        form {
-
-            .responceMessage {
-                display: flex;
-                justify-content: left;
-                width: 100%;
-                height: 3rem;
-                margin-left: 0.5rem;
-                gap: 1rem;
-                align-items: center;
-                border: 0;
-                padding: 1rem;
-                border-radius: 0.5rem;
-                background: rgb(240, 240, 240);
-            }
-
-            input {
-                width: 100%;
-                height: 6rem;
-                border: 0;
-                padding: 1rem;
-                border-radius: 0.5rem;
-                background: #fefefe;
-                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-
-                overflow: auto;
-                resize: none;
-
-                &::-webkit-scrollbar {
-                    width: 0px;
-                }
-            }
-            .user-info{
-                display: flex;
-                align-items: center;
-
-                img {
-                    height: 2rem;
-                    width: 2rem;
-
-                    border-radius: 50%;
-                }
-
-                span {
-                    margin-left: 0.5rem;
-                    font-size: 0.8rem;
-                    color: #29292e;
-                    font-weight: 500;
-                }
-            }
-
-            div {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-top: 1rem;
-
-                p {
-                    font-size: 0.8rem;
-                    color: #737380;
-
-                    font-weight: 500;
-
-                    button {
-                        background: transparent;
-                        color: #835afd;
-                        border: 0;
-
-                        text-decoration: underline;
-                        font-size: 0.8rem;
-
-                        cursor: pointer;
-                    }
-                }
-            }
-
-            button {
-                transition: background-color 0.2;
-            }
-        }
-
         .question-list {
-            margin-top: 1.3rem;
+            margin-bottom: 1rem;
+            width: 45rem;
 
             display: flex;
             flex-direction: column-reverse;
@@ -172,14 +69,99 @@ export const PageRoom = styled.div`
                 flex-direction: column;
                 align-items: center;
 
+                svg {
+                    font-size: 6rem;
+                    color: ${props => props.theme.colors.text};
+                }
+
                 h2 {
                     margin: 1rem;
                     font: 700 1.5rem 'Poppins', sans-serif;
                 }
 
                 p {
-                    color: #737880;
+                    color:  ${props => props.theme.colors.text};
                 }
+            }
+        }
+    }
+
+    > section {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        padding-top: 0.5rem;
+
+        form {
+            display: flex;
+            align-items: center;
+
+            gap: 1rem;                      
+            margin-bottom: 1rem;
+
+            width: 100%;
+            max-width: 45rem;
+
+            img {
+                height: 3rem;
+                width: 3rem;
+
+                border-radius: 50%;
+            }
+
+            input {
+                width: 100%;
+                height: 4rem;
+                border: 0;
+                padding: 1rem;
+                border-radius: 0.5rem;
+                background: ${props => props.theme.colors.blocosInput.background};
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+
+                overflow: auto;
+                resize: none;
+
+                color:  ${props => props.theme.colors.text};
+
+                &::-webkit-scrollbar {
+                    width: 0px;
+                }
+                ::placeholder {
+                    color:  ${props => props.theme.colors.text};
+                }
+                &:focus {
+                    outline: 0;
+                }
+            } 
+
+            div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 1rem;
+            }
+
+            p {
+                    font-size: 0.8rem;
+                    color:  ${props => props.theme.colors.text};;
+
+                    font-weight: 500;
+
+                    button {
+                        background: transparent;
+                        color:  ${props => props.theme.colors.button};;
+                        border: 0;
+
+                        text-decoration: underline;
+                        font-size: 0.8rem;
+
+                        cursor: pointer;
+                    }
+                }
+
+            button {
+                transition: background-color 0.2;
             }
         }
     }

@@ -22,6 +22,8 @@ width: 100%;
 
 overflow: hidden;
 
+transition: display 0.2s;
+
     aside {
         flex: 7;
 
@@ -155,6 +157,28 @@ overflow: hidden;
                     width: 100%;
                 }
             }
+        }
+    }
+
+    @media(max-width: 1200px) {
+        aside{
+            strong {
+                font: 700 1.5rem 'Poppins', sans-serif;
+                line-height: 3rem;
+                margin-top: 1rem;
+            }
+
+            p {
+                font-size: 1.rem;
+                line-height: 2rem;
+                color: ${props => props.theme.home.aside.textColor};
+            }
+        }
+    }
+
+    @media(max-width: 1000px){
+        aside { 
+            display: none;
         }
     }
 `;

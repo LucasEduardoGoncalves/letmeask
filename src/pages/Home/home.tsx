@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 import illustration from '../../assets/illustration.svg';
 import logoimg from '../../assets/logoLigth.svg';
@@ -13,14 +13,33 @@ import { Container } from './styles';
 import { Button } from '../../components/Button';
 import { database } from '../../services/firebase';
 
+import toast, { Toaster } from 'react-hot-toast';
 import { useTheme } from '../../hooks/useTheme';
 
 export function Home() {
 
     const history = useHistory();
     const { user, signInWithGoogle } = useAuth();
-    const [roomCode, setRoomCode] = useState('');
+    const [ roomCode, setRoomCode ] = useState('');
     const { theme } = useTheme();
+
+    const notify = () => toast.success(`Seja bem vindo, ${user?.name}`,
+    {
+        style: {
+          border: `1px solid ${theme.toast.borderColor}`,
+          padding: '16px',
+          color: `${theme.toast.textColor}`,
+          background: `${theme.toast.background}`,
+        },
+        iconTheme: {
+          primary: `${theme.toast.icon.cor1}`,
+          secondary: `${theme.toast.icon.cor2}`,
+        }
+    });
+
+    useEffect( () => {
+        if (user) notify();
+    }, [user]);
 
     async function createNewRoom() {
         if(!user){
@@ -34,18 +53,55 @@ export function Home() {
         event.preventDefault();
 
         if(roomCode.trim() === '') {
+            toast.error("Preencha o campo e tente novamente.",
+            {
+                style: {
+                  border: `1px solid ${theme.toast.borderColor}`,
+                  padding: '16px',
+                  color: `${theme.toast.textColor}`,
+                  background: `${theme.toast.background}`,
+                },
+                iconTheme: {
+                  primary: `${theme.toast.icon.cor1}`,
+                  secondary: `${theme.toast.icon.cor2}`,
+                }
+            });
             return;
         }
 
         const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
         if(!roomRef.exists()) {
-            alert('Room does not exist.');
+            toast.error("A sala não existe.",
+            {
+                style: {
+                  border: `1px solid ${theme.toast.borderColor}`,
+                  padding: '16px',
+                  color: `${theme.toast.textColor}`,
+                  background: `${theme.toast.background}`,
+                },
+                iconTheme: {
+                  primary: `${theme.toast.icon.cor1}`,
+                  secondary: `${theme.toast.icon.cor2}`,
+                }
+            });
             return;
         }
 
         if(roomRef.val().endedAt) {
-            alert('Room already closed.');
+            toast.error("A sala já foi fechada",
+            {
+                style: {
+                  border: `1px solid ${theme.toast.borderColor}`,
+                  padding: '16px',
+                  color: `${theme.toast.textColor}`,
+                  background: `${theme.toast.background}`,
+                },
+                iconTheme: {
+                  primary: `${theme.toast.icon.cor1}`,
+                  secondary: `${theme.toast.icon.cor2}`,
+                }
+            });
             return;
         }
 
@@ -54,6 +110,7 @@ export function Home() {
 
     return(
         <Container>
+            <Toaster/>
             <aside>
                 <img src={illustration} alt="Ilustração simbolizando perguntas e respostas"/>
                 <strong>Crie salas de chat ao-vivo</strong>

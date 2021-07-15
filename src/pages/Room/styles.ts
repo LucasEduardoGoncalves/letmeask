@@ -34,6 +34,20 @@ export const Header = styled.div`
             color: ${props => props.theme.colors.button};
         }
     }   
+
+    @media(max-width:1000px) {
+        img {
+            max-height: 3rem;
+        }
+
+        padding: 1rem;
+
+        .title {
+            h1 {
+                font-size: 1rem;
+            }
+        }
+    }
 `;
 
 export const Conteudo = styled.main`
@@ -44,11 +58,14 @@ export const Conteudo = styled.main`
         flex-direction: column;
         overflow: auto;  
 
+        align-items: center;
+
+        width: 100%;
+
         margin: 0 auto;
 
         height: 71%;
-        max-width: 45rem;
-        padding: 3rem;
+
             
         ::-webkit-scrollbar {
             width: 0;
@@ -56,6 +73,7 @@ export const Conteudo = styled.main`
 
         .question-list {
             margin-bottom: 1rem;
+            width: 45rem;
 
             display: flex;
             flex-direction: column-reverse;
@@ -158,6 +176,40 @@ export const Conteudo = styled.main`
 
             button {
                 transition: background-color 0.2;
+            }
+        }
+    }
+
+    @media (max-width: 1000px){
+        max-width: 60rem;
+
+        .question-list{
+            max-width: 18rem;
+
+            .emptyQuestion {
+
+                svg { 
+                    font-size: 2rem;
+                }
+
+                p {
+                    display: none;
+                }
+            }
+        }
+
+        > section {
+            form {
+                margin: 1rem;
+                gap: 0.5rem;
+                img {
+                    height: 3rem;
+                    width: 3rem;
+                }
+
+                input {
+                    height: 3rem;
+                }
             }
         }
     }

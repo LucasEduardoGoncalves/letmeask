@@ -23,6 +23,10 @@ export const Container = styled.div`
 
     animation: ${appearFromBottom} 1s;
 
+    a {
+        text-decoration: none;
+    }
+
     textarea {
         color:  ${props => props.theme.colors.text};
         width: 100%;

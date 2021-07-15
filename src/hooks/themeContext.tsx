@@ -12,16 +12,29 @@ interface ThemeContextData {
 interface ThemeProviderProps {
   children: ReactNode;
   defaultTheme: DefaultTheme;
+  
 }
 
 export const ThemeContext = createContext({} as ThemeContextData);
 
 export function ThemeProvider({ children, defaultTheme }: ThemeProviderProps) {
 
-  const [theme, setTheme] = useState(defaultTheme);
+  const [theme, setTheme] = useState(() => {
+    const storageValue = localStorage.getItem("theme");
+
+    if (storageValue) {
+      return JSON.parse(storageValue);
+    } else {
+      return defaultTheme
+    }
+
+  });
  
   const toggleTheme = () => {
-    setTheme(theme.title === "light" ? dark : light);  
+    const newTheme = theme.title === "light" ? dark : light;
+
+    localStorage.setItem("theme", JSON.stringify(newTheme));
+    setTheme(newTheme);     
   };
 
   return (

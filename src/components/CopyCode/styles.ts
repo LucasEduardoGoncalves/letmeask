@@ -55,4 +55,10 @@ export const Container = styled.button`
             color: ${props => props.theme.copyCode.hover.background};
         }
     }
+
+    @media(max-width: 1000px) {
+        span {
+            display: none
+        }
+    }
 `;

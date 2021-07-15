@@ -91,6 +91,7 @@ export const FeedBack = styled.div`
 
             h2 {
                 font-size: 1.3rem;
+                font-weight: 500;
                 margin: 0.2rem;
             };
         };
