@@ -1,8 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 
-import ScrollToBottom from 'react-scroll-to-bottom';
-
 import logoimg from '../../assets/logoLigth.svg';
 import logoimgDark from '../../assets/logoDark.svg';
 
@@ -26,6 +24,8 @@ import { useRoom } from '../../hooks/useRoom';
 
 import { database } from '../../services/firebase';
 import { useTheme } from '../../hooks/useTheme';
+
+import ReactScrollableFeed from 'react-scrollable-feed';
 
 type RoomParams = {
     id: string;
@@ -113,7 +113,7 @@ export function Room() {
                 </Header>
                 
                 <main>
-                    <ScrollToBottom className="question-list">
+                    <ReactScrollableFeed className="question-list">
                         { questions.length === 0 ? (
 
                             <div className="emptyQuestion">
@@ -156,7 +156,7 @@ export function Room() {
                                 </QuestionArea>
                             )
                         })}                   
-                    </ScrollToBottom>
+                    </ReactScrollableFeed>
                 </main>
 
                 <section>             

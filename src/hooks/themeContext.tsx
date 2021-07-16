@@ -7,12 +7,12 @@ import  dark from '../styles/themes/dark';
 interface ThemeContextData {
   theme: DefaultTheme;
   toggleTheme: () => void;
+  styledToast: object;
 }
 
 interface ThemeProviderProps {
   children: ReactNode;
   defaultTheme: DefaultTheme;
-  
 }
 
 export const ThemeContext = createContext({} as ThemeContextData);
@@ -29,6 +29,19 @@ export function ThemeProvider({ children, defaultTheme }: ThemeProviderProps) {
     }
 
   });
+
+  const styledToast = {
+    style: {
+      border: `1px solid ${theme.toast.borderColor}`,
+      padding: '16px',
+      color: `${theme.toast.textColor}`,
+      background: `${theme.toast.background}`,
+    },
+    iconTheme: {
+      primary: `${theme.toast.icon.cor1}`,
+      secondary: `${theme.toast.icon.cor2}`,
+    }
+  }
  
   const toggleTheme = () => {
     const newTheme = theme.title === "light" ? dark : light;
@@ -43,6 +56,7 @@ export function ThemeProvider({ children, defaultTheme }: ThemeProviderProps) {
         value={{
           theme,
           toggleTheme,
+          styledToast
         }}
       >
         {children}

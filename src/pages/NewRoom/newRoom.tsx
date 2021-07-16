@@ -1,34 +1,40 @@
 import { FormEvent, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { useAuth } from '../../hooks/auth';
+import { Container } from './styles';
+
+import { Loading } from '../../components/Loading';
 
 import illustration from '../../assets/illustration.svg';
 import logoimg from '../../assets/logoLigth.svg';
 import logoimgDark from '../../assets/logoDark.svg';
 
-import { Container } from './styles';
 import { Button } from '../../components/Button';
 
 import { database } from '../../services/firebase';
 
 import { useTheme } from '../../hooks/useTheme';
+import { useAuth } from '../../hooks/auth';
+
+import toast, { Toaster } from 'react-hot-toast';
 
 export function NewRoom() {
-
-    const { user } = useAuth();
+   
     const history = useHistory();
 
-    const { theme } = useTheme();
-    
-
+    const { user } = useAuth();
+    const { theme, styledToast } = useTheme();
     
     const [newRoom, setNewRoom] = useState('');
+    const [loading, setLoading] = useState(false);
     
     async function handleCreateRoom(event: FormEvent) {
         event.preventDefault();
+        setLoading(true);
 
         if(newRoom.trim() === '' ){
+            toast.error('Preencha o campo e tente novamente.', styledToast);
+            setLoading(false);
             return;
         };
 
@@ -40,19 +46,22 @@ export function NewRoom() {
         });
 
         history.push(`/rooms/${firebaseRooms.key}`);
-    }
+        setLoading(false);
+    };
 
     return(
         <Container>
+            <Toaster/>
+
             <aside>
                 <img src={illustration} alt="Ilustração simbolizando perguntas e respostas"/>
-                <strong>Crie salas de Q&amp;A ao-vivo</strong>
-                <p>Tire as dúvidas da sua audiencia em tempo real</p>
+                <strong>Crie salas de chat ao-vivo</strong>
+                <p>Converse com seus amigos em tempo real</p>
             </aside>
 
             <main>
                 <section>
-                {theme.title === 'light' ? <img src={logoimg} alt="LetMeAsk"/> : <img src={logoimgDark} alt="LetMeAsk"/>}
+                    {theme.title === 'light' ? <img src={logoimg} alt="LetMeAsk"/> : <img src={logoimgDark} alt="LetMeAsk"/>}
                     <h2>Criar uma nova sala</h2>
 
                     <form onSubmit={handleCreateRoom}>
@@ -64,7 +73,7 @@ export function NewRoom() {
                         />
 
                         <Button type="submit">
-                            Criar sala
+                            {loading ? <Loading/> : <div>Criar sala</div>}
                         </Button>
                     </form>
 

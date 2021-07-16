@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components'
 const appearFromBottom = keyframes`
     from {
         opacity: 0;
-        transform: translatex(-50px);
+        transform: translateX(-50px);
     }
 
     to {
@@ -19,12 +19,23 @@ export const Container = styled.div`
     border-radius: 0.5rem;
     padding: 1.5rem;
 
+    max-width: 45rem;
+    width: 100%;
+
     margin-top: 0.5rem;
+    border: 1px solid ${props => props.theme.colors.blocosInput.background};
+    
 
     animation: ${appearFromBottom} 1s;
 
     a {
         text-decoration: none;
+    }
+    transition: border-color 0.2s ;
+
+    &:hover {
+       
+        border-color: ${props => props.theme.sideBar.background};
     }
 
     textarea {
@@ -34,8 +45,6 @@ export const Container = styled.div`
         background: transparent;
         resize: none;
         outline: none;
-
-        max-height: 50rem;
 
         ::-webkit-scrollbar {
             width: 0;

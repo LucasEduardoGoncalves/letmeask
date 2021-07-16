@@ -1,12 +1,14 @@
 import { FormEvent, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import illustration from '../../assets/illustration.svg';
 import logoimg from '../../assets/logoLigth.svg';
 import logoimgDark from '../../assets/logoDark.svg';
-import google from '../../assets/google-icon.svg'; 
 
-import { useHistory } from 'react-router-dom';
+import { ImGoogle } from 'react-icons/im';
+
 import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/useTheme';
 
 import { Container } from './styles';
 
@@ -14,38 +16,24 @@ import { Button } from '../../components/Button';
 import { database } from '../../services/firebase';
 
 import toast, { Toaster } from 'react-hot-toast';
-import { useTheme } from '../../hooks/useTheme';
 
 export function Home() {
 
     const history = useHistory();
-    const { user, signInWithGoogle } = useAuth();
-    const [ roomCode, setRoomCode ] = useState('');
-    const { theme } = useTheme();
 
-    const notify = () => toast.success(`Seja bem vindo, ${user?.name}`,
-    {
-        style: {
-          border: `1px solid ${theme.toast.borderColor}`,
-          padding: '16px',
-          color: `${theme.toast.textColor}`,
-          background: `${theme.toast.background}`,
-        },
-        iconTheme: {
-          primary: `${theme.toast.icon.cor1}`,
-          secondary: `${theme.toast.icon.cor2}`,
-        }
-    });
+    const { user, signInWithGoogle } = useAuth();
+    const { theme, styledToast } = useTheme();
+
+    const [ roomCode, setRoomCode ] = useState('');  
 
     useEffect( () => {
-        if (user) notify();
-    }, [user]);
+        if (user) toast.success(`Seja bem vindo, ${user?.name}`, styledToast)
+    }, [user, styledToast]);
 
     async function createNewRoom() {
         if(!user){
           await  signInWithGoogle();
-        }
-        
+        };
         history.push('/rooms/new');
     };
 
@@ -53,60 +41,24 @@ export function Home() {
         event.preventDefault();
 
         if(roomCode.trim() === '') {
-            toast.error("Preencha o campo e tente novamente.",
-            {
-                style: {
-                  border: `1px solid ${theme.toast.borderColor}`,
-                  padding: '16px',
-                  color: `${theme.toast.textColor}`,
-                  background: `${theme.toast.background}`,
-                },
-                iconTheme: {
-                  primary: `${theme.toast.icon.cor1}`,
-                  secondary: `${theme.toast.icon.cor2}`,
-                }
-            });
+            toast.error('Preencha o campo e tente novamente.', styledToast);
             return;
-        }
+        };
 
         const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
         if(!roomRef.exists()) {
-            toast.error("A sala não existe.",
-            {
-                style: {
-                  border: `1px solid ${theme.toast.borderColor}`,
-                  padding: '16px',
-                  color: `${theme.toast.textColor}`,
-                  background: `${theme.toast.background}`,
-                },
-                iconTheme: {
-                  primary: `${theme.toast.icon.cor1}`,
-                  secondary: `${theme.toast.icon.cor2}`,
-                }
-            });
+            toast.error('A sala não existe.', styledToast);
             return;
-        }
+        };
 
         if(roomRef.val().endedAt) {
-            toast.error("A sala já foi fechada",
-            {
-                style: {
-                  border: `1px solid ${theme.toast.borderColor}`,
-                  padding: '16px',
-                  color: `${theme.toast.textColor}`,
-                  background: `${theme.toast.background}`,
-                },
-                iconTheme: {
-                  primary: `${theme.toast.icon.cor1}`,
-                  secondary: `${theme.toast.icon.cor2}`,
-                }
-            });
+            toast.error('A sala já foi fechada.', styledToast);
             return;
-        }
+        };
 
         history.push(`rooms/${roomCode}`);
-    }
+    };
 
     return(
         <Container>
@@ -119,11 +71,11 @@ export function Home() {
 
             <main>
                 <section>
-                {theme.title === 'light' ? <img src={logoimg} alt="LetMeAsk"/> : <img src={logoimgDark} alt="LetMeAsk"/>}
+                    {theme.title === 'light' ? <img src={logoimg} alt="LetMeAsk"/> : <img src={logoimgDark} alt="LetMeAsk"/>}
 
                     <button onClick={createNewRoom} className="create-room" type="button">
-                        <img src={google} alt="Imagem do Google"/>
-                        Crie sua sala com o Google
+                        <ImGoogle/>
+                        <div> Crie sua sala com o Google </div> 
                     </button>
 
                     <div className="separator">ou entre em uma sala</div>

@@ -1,7 +1,8 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { Container, Conteudo, Header } from './styles';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { SideBar } from '../../components/SideBar';
 import { Button } from '../../components/Button'
@@ -34,10 +35,19 @@ export function AdminRoom() {
     const { theme } = useTheme();
     const { user } = useAuth();
     
-    const { questions, title } = useRoom(roomId); 
+    const { questions, title, authorId } = useRoom(roomId); 
     const history = useHistory();
 
     const [newQuestion, setNewQuestion] = useState('');
+
+
+    useEffect(() => {
+        if(user?.id !== authorId) {
+            toast.error('Usario com erro');
+            console.log(user?.id);
+            console.log(authorId);
+        }
+    },[user?.id, authorId, history])
 
     async function handleDeleteQuestion(questionId: string) {
        if(window.confirm('Tem certeza que deseja deletar essa pergunta?')){
@@ -92,108 +102,46 @@ export function AdminRoom() {
 
     return (
         <Container>
+            <Toaster/>
             <Conteudo>
-            <Header>
-                {theme.title === 'light' ? <img src={logoimg} alt="LetMeAsk"/> : <img src={logoimgDark} alt="LetMeAsk"/>}                    
+                <Header>
+                    {theme.title === 'light' ? <img src={logoimg} alt="LetMeAsk"/> : <img src={logoimgDark} alt="LetMeAsk"/>}                    
 
-                <div className="title">
-                    <h1>{title}</h1> 
-                    <div>--</div>  
-                    <CopyRoomCode  code={roomId}/>     
-                    <Button onClick={handleEndRoom} isOutlined>Encerrar sala</Button>    
-                </div>
-            </Header>
-            {/* <header>
-                <div className="content">
-                    <img src={logoimg} alt="LetMeAsk" />
-                    <div>
-                        <CopyRoomCode code={roomId}/>
-                        
+                    <div className="title">
+                        <h1>{title}</h1> 
+                        <div>--</div>  
+                        <CopyRoomCode  code={roomId}/>     
+                        <Button onClick={handleEndRoom} isOutlined>Encerrar sala</Button>    
                     </div>
-                </div>
-            </header> */}
+                </Header>
 
-            
-                
-                
-                {/* <div className="question-list">
-                    { questions.map(question => { 
-                        return (
-                            <QuestionArea 
-                                key={question.id}
-                                content={question.content}
-                                author={question.author}
-                                isAnswer={question.isAnswer}
-                                isHighlighted={question.isHighlighted}
-                            >                               
-                                {!question.isAnswer && 
-                                    <>
-                                        <button
-                                        onClick={() => handleCheckQuestion(question.id)}
-                                        type="button"
-                                        >
-                                            <img src={checkImg} alt="Marcar pergunta como respondida" />
-                                        </button>
+                <main>
+                    <div className="question-list">
+                        { questions.map(question => { 
+                            return (
+                                <QuestionArea 
+                                    key={question.id}
+                                    content={question.content}
+                                    author={question.author}
+                                    isAnswer={question.isAnswer}
+                                    isHighlighted={question.isHighlighted}
+                                >                               
+                                    
+                                    <button onClick={() => handleCheckQuestion(question.id)} type="button">
+                                        <img src={checkImg} alt="Marcar pergunta como respondida" />
+                                    </button>
 
-                                        <button
-                                            onClick={() => handleAnswerQuestion(question.id)}
-                                            type="button"
-                                        >
-                                            <img src={answer} alt="Dar foco para a pergunta" />
-                                        </button>
-                                    </> 
-                                }
-
-                                <button 
-                                    onClick={() => handleDeleteQuestion(question.id)}
-                                    type="button"
-                                >
-                                    <img src={deleteImg} alt="Excluir Pergunta" />
-                                </button>
-                            </QuestionArea>
-                        )
-                    })}
-                </div>
-            </section> */}
-            <main>
-            <div className="question-list">
-                    { questions.map(question => { 
-                        return (
-                            <QuestionArea 
-                                key={question.id}
-                                content={question.content}
-                                author={question.author}
-                                isAnswer={question.isAnswer}
-                                isHighlighted={question.isHighlighted}
-                            >                               
-                                {!question.isAnswer && 
-                                    <>
-                                        <button
-                                        onClick={() => handleCheckQuestion(question.id)}
-                                        type="button"
-                                        >
-                                            <img src={checkImg} alt="Marcar pergunta como respondida" />
-                                        </button>
-
-                                        <button
-                                            onClick={() => handleAnswerQuestion(question.id)}
-                                            type="button"
-                                        >
-                                            <img src={answer} alt="Dar foco para a pergunta" />
-                                        </button>
-                                    </> 
-                                }
-
-                                <button 
-                                    onClick={() => handleDeleteQuestion(question.id)}
-                                    type="button"
-                                >
-                                    <img src={deleteImg} alt="Excluir Pergunta" />
-                                </button>
-                            </QuestionArea>
-                        )
-                    })}
-                </div>
+                                    <button onClick={() => handleAnswerQuestion(question.id)} type="button">
+                                        <img src={answer} alt="Dar foco para a pergunta" />
+                                    </button>
+                                  
+                                    <button onClick={() => handleDeleteQuestion(question.id)} type="button">
+                                        <img src={deleteImg} alt="Excluir Pergunta" />
+                                    </button>
+                                </QuestionArea>
+                            )
+                        })}
+                    </div>
                 </main>
 
                 <section>             

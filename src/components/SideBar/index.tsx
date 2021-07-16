@@ -11,7 +11,7 @@ import iconligh from '../../assets/icon.svg';
 
 import { FiSun, FiMoon, FiAlertTriangle } from 'react-icons/fi';
 import { RiFeedbackLine, RiArrowDropLeftLine } from 'react-icons/ri';
-import { BiMessageRoundedCheck } from 'react-icons/bi';
+import { BiMessageRoundedCheck, BiLogOut, BiLogIn } from 'react-icons/bi';
 import { CgFeed } from 'react-icons/cg';
 import { IoReturnDownBack, IoExitOutline } from 'react-icons/io5';
 
@@ -21,7 +21,7 @@ import { useAuth } from '../../hooks/auth';
 import { database } from '../../services/firebase';
 
 export const SideBar = () => {
-    const { user, signOut } = useAuth();
+    const { user, signOut, signInWithGoogle } = useAuth();
     const { theme, toggleTheme } = useTheme();
     const  history = useHistory();
 
@@ -113,8 +113,8 @@ export const SideBar = () => {
 
             {user ? 
                 <header>
-                    <img src={user?.avatar} alt="Seu avatar" />
-                    <h4>{user?.name}</h4>              
+                    <img src={user.avatar} alt="Seu avatar" />
+                    <h4>{user.name}</h4>              
                 </header> 
             : 
                 <header>
@@ -129,10 +129,16 @@ export const SideBar = () => {
                     Temas
                 </button>
 
-                <div onClick={toggleModalLogout}>
-                    <IoExitOutline/>
-                    Logout
-                </div>
+                {user ? 
+                    <div onClick={toggleModalLogout}>
+                        <BiLogOut/>
+                        Logout
+                    </div> : 
+                    <div onClick={signInWithGoogle}>
+                        <BiLogIn/>
+                        Login
+                    </div>
+                }
 
                 <div onClick={toggleModalHome}>
                     <IoReturnDownBack/>

@@ -14,25 +14,24 @@ const appearFromRight = keyframes`
 `;
 
 export const Container = styled.div`
-display: flex;
-flex-direction: row;
-align-items: stretch;
-height: 100vh;
-width: 100%;
+    display: flex;
+    align-items: stretch;
 
-overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 
-transition: display 0.2s;
+    overflow: hidden;
+    transition: display 0.2s;
 
     aside {
-        flex: 7;
-
-        background: ${props => props.theme.home.aside.background};
-        color: ${props => props.theme.home.aside.textColor};
-
         display: flex;
         flex-direction: column;
         justify-content: center;
+
+        flex: 7;
+
+        background: ${props => props.theme.home.aside.background};
+        color: ${props => props.theme.home.aside.textColor};    
 
         padding: 7.5rem 5rem;
 
@@ -54,14 +53,12 @@ transition: display 0.2s;
     }
 
     main {
-        flex: 8;
-
-        padding: 0 2rem;
-
         display: flex;
         align-items: center;
         justify-content: center;
 
+        flex: 8;
+        padding: 0 2rem;       
         animation: ${appearFromRight} 1s;
 
         section {
@@ -80,24 +77,26 @@ transition: display 0.2s;
             }
 
             .create-room {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
                 margin-top: 4.5rem;
                 height: 3.5rem;
                 border-radius: 0.5rem;
                 font-weight: 500;
+
                 background: #ea4335;
                 color: #fff;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
 
                 cursor: pointer;
                 border: 0;
 
                 transition: background-color 0.2s ;
 
-                img {
+                svg {
                     margin-right: 0.5rem;
+                    font-size: 2rem;
                 }
 
                 &:hover {
@@ -136,6 +135,7 @@ transition: display 0.2s;
                 input {
                     height: 3.5rem;
 
+                    border: 1px solid ${props => props.theme.home.main.input.borderColor};
                     border-radius: 0.5rem;
                     padding: 0 1rem;
 
@@ -143,10 +143,10 @@ transition: display 0.2s;
 
                     background: ${props => props.theme.home.main.input.background};
                     color: ${props => props.theme.home.main.input.color};
+
                     ::placeholder {
                         color: ${props => props.theme.home.main.input.placeholder}
-                    }
-                    border: 1px solid ${props => props.theme.home.main.input.borderColor};
+                    }   
                 }
 
                 button {
@@ -160,23 +160,7 @@ transition: display 0.2s;
         }
     }
 
-    @media(max-width: 1200px) {
-        aside{
-            strong {
-                font: 700 1.5rem 'Poppins', sans-serif;
-                line-height: 3rem;
-                margin-top: 1rem;
-            }
-
-            p {
-                font-size: 1.rem;
-                line-height: 2rem;
-                color: ${props => props.theme.home.aside.textColor};
-            }
-        }
-    }
-
-    @media(max-width: 1000px){
+    @media(max-width: 1200px){
         aside { 
             display: none;
         }

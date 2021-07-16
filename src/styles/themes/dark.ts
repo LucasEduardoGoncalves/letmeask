@@ -98,9 +98,9 @@ const dark = {
                 backgroundHover: '#6c757d'
             },
             button2: {
-                color: '#343a40',
-                background: '#adb5bd',
-                backgroundHover: '#6c757d'
+                color: '#f8f9fa',
+                background: '#E73F5D',
+                backgroundHover: '#E21C40'
             }
         }
     },
