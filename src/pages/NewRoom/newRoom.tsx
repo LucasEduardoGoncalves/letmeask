@@ -1,22 +1,20 @@
 import { FormEvent, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { Container } from './styles';
 
 import { Loading } from '../../components/Loading';
+import { Button } from '../../components/Button';
 
 import illustration from '../../assets/illustration.svg';
 import logoimg from '../../assets/logoLigth.svg';
 import logoimgDark from '../../assets/logoDark.svg';
 
-import { Button } from '../../components/Button';
-
 import { database } from '../../services/firebase';
 
 import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/auth';
-
-import toast, { Toaster } from 'react-hot-toast';
 
 export function NewRoom() {
    
@@ -30,6 +28,7 @@ export function NewRoom() {
     
     async function handleCreateRoom(event: FormEvent) {
         event.preventDefault();
+
         setLoading(true);
 
         if(newRoom.trim() === '' ){
@@ -52,7 +51,6 @@ export function NewRoom() {
     return(
         <Container>
             <Toaster/>
-
             <aside>
                 <img src={illustration} alt="Ilustração simbolizando perguntas e respostas"/>
                 <strong>Crie salas de chat ao-vivo</strong>

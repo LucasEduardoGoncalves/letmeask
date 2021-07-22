@@ -42,16 +42,14 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
                     name: displayName,
                     avatar: photoURL,
                 }) 
-
-                
             }
         })
-    return () => {
-        unsubscribe();
-    }
+        return () => {
+            unsubscribe();
+        }
     },[]);
 
-    const signOut = useCallback(async() =>{
+    const signOut = useCallback(async () => {
         await firebase.auth().signOut();
         setUser(undefined);
     },[])

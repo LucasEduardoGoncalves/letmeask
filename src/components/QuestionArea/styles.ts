@@ -33,8 +33,7 @@ export const Container = styled.div`
     }
     transition: border-color 0.2s ;
 
-    &:hover {
-       
+    &:hover {     
         border-color: ${props => props.theme.sideBar.background};
     }
 
@@ -61,6 +60,18 @@ export const Container = styled.div`
         border: 0;
         color: ${props => props.theme.colors.blocosInput};
     } 
+
+    .response {
+        display: flex;
+        align-items: center;
+        opacity: 0.8;
+        margin: 0.5rem;
+        color: ${props => props.theme.colors.text};
+
+        svg {
+            margin-right: 0.5rem;
+        }
+    }
    
     footer {
         display: flex;
@@ -113,7 +124,7 @@ export const Container = styled.div`
                
             }
             &.liked {
-                color: red;
+                color: ${props => props.theme.sideBar.background};
 
                 svg path {
                     stroke: ${props => props.theme.colors.button};

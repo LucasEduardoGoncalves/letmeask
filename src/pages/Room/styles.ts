@@ -55,22 +55,14 @@ export const Conteudo = styled.main`
 
     main {
         display: flex;
-        flex-direction: column;
-        overflow: auto;  
-
+        flex-direction: column; 
         align-items: center;
 
         width: 100%;
-        padding: 1rem;
-
-        margin: 0 auto;
-
         height: 71%;
 
-            
-        ::-webkit-scrollbar {
-            width: 0;
-        }
+        padding: 1rem;
+        margin: 0 auto;      
 
         .question-list {
             
@@ -80,8 +72,6 @@ export const Conteudo = styled.main`
             flex-direction: column;
             align-items: center;
             height: 100%;
-
-            /* padding: 0 3rem; */
 
             ::-webkit-scrollbar{
                 width: 0;
@@ -113,8 +103,10 @@ export const Conteudo = styled.main`
 
     > section {
         width: 100%;
+        
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
 
         padding:0 1rem;
 
@@ -133,6 +125,19 @@ export const Conteudo = styled.main`
                 width: 3rem;
 
                 border-radius: 50%;
+            }
+
+            p {
+                max-width: 10rem;
+                display: flex;
+                align-items: baseline;
+                overflow: hidden;
+
+                div {
+                    font-size: 1rem;
+                    color: #ccc;
+                    margin-right: 0.5rem;
+                }
             }
 
             input {

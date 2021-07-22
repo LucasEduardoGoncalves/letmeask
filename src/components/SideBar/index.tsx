@@ -22,7 +22,8 @@ import { database } from '../../services/firebase';
 
 export const SideBar = () => {
     const { user, signOut, signInWithGoogle } = useAuth();
-    const { theme, toggleTheme } = useTheme();
+    const { theme, toggleTheme, styledToast } = useTheme();
+
     const  history = useHistory();
 
     function logout() {
@@ -34,20 +35,6 @@ export const SideBar = () => {
         history.push('/');
         toggleModalHome();
     };
-
-    const notify = () => toast.success('Feedback enviado com sucesso',
-    {
-        style: {
-          border: `1px solid ${theme.toast.borderColor}`,
-          padding: '16px',
-          color: `${theme.toast.textColor}`,
-          background: `${theme.toast.background}`,
-        },
-        iconTheme: {
-          primary: `${theme.toast.icon.cor1}`,
-          secondary: `${theme.toast.icon.cor2}`,
-        }
-    });
 
     const [modalFeedBack, setModalFeedBack] = useState(false);
     const toggleModalFeedBack = () => setModalFeedBack(!modalFeedBack);
@@ -98,7 +85,7 @@ export const SideBar = () => {
         await database.ref(`/feedback`).push(feedback);
 
         setNewFeedback('');
-        notify();
+        toast.success('Feedback enviado com sucesso', styledToast);
         setModalFeedBackTanks(false);
         setModalFeedBackHelp(false);  
     };

@@ -15,7 +15,6 @@ import { useAuth } from "../../hooks/auth";
 import { database } from "../../services/firebase";
 import { SideBar } from '../../components/SideBar';
 
-
 type FeedbackType = {
     id: string,
     author: {
@@ -66,6 +65,10 @@ export const FeedBack = () => {
             setFeedback(parsedQuestions);
             
         })
+
+        return () => {
+            unsubscribe();
+        }
     }, []);
     
     return (
@@ -108,3 +111,7 @@ export const FeedBack = () => {
     </>
     )
 };
+
+function unsubscribe() {
+    throw new Error("Function not implemented.");
+}

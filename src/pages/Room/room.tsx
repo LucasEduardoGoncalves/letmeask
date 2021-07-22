@@ -1,11 +1,16 @@
 import { useState, FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
+import ReactScrollableFeed from 'react-scrollable-feed';
+
+import icon from '../../assets/iconDark.svg';
+import iconligh from '../../assets/icon.svg';
 
 import logoimg from '../../assets/logoLigth.svg';
 import logoimgDark from '../../assets/logoDark.svg';
 
-import { AiOutlineHeart, AiOutlineCheck } from 'react-icons/ai';
+import { AiOutlineCheck, AiOutlineLike, AiFillLike } from 'react-icons/ai';
 import { BiMessageSquareDetail } from 'react-icons/bi';
+import { BsArrow90DegLeft } from 'react-icons/bs';
 import { TiDeleteOutline } from 'react-icons/ti'
 import { CgTrash } from 'react-icons/cg';
 
@@ -21,11 +26,9 @@ import { SideBar } from '../../components/SideBar';
 
 import { useAuth } from '../../hooks/auth';
 import { useRoom } from '../../hooks/useRoom';
-
-import { database } from '../../services/firebase';
 import { useTheme } from '../../hooks/useTheme';
 
-import ReactScrollableFeed from 'react-scrollable-feed';
+import { database } from '../../services/firebase';
 
 type RoomParams = {
     id: string;
@@ -41,7 +44,7 @@ export function Room() {
     const params = useParams<RoomParams>()
     const roomId = params.id;
     
-    const { user, signInWithGoogle } = useAuth();
+    const { user } = useAuth();
     const { questions, title } = useRoom(roomId);
 
     const [newQuestion, setNewQuestion] = useState('');
@@ -67,6 +70,14 @@ export function Room() {
         await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();           
     };
 
+    
+    const [respondendo, setRespondendo] = useState('');
+    const [idResponse, setIdResponse] = useState('');
+    function response(resposta: string, idResponse: string) {
+        setRespondendo(resposta);
+        setIdResponse(idResponse);
+    };
+
     async function handleSendQuestion(event: FormEvent) {
         event.preventDefault();
 
@@ -85,17 +96,15 @@ export function Room() {
                 avatar: user.avatar,                
             },
             isHighlighted: false,
-            isAnswer: false
+            isAnswer: false,
+            response: respondendo,
+            responseId: idResponse
         };
 
         setNewQuestion('');
+        setRespondendo('');
+        setIdResponse('');
         await database.ref(`rooms/${roomId}/questions`).push(question);   
-    };
-
-    async function newLogin() {
-        if(!user){
-          await  signInWithGoogle();
-        }
     };
 
     return (
@@ -107,10 +116,9 @@ export function Room() {
 
                     <div className="title">
                         <h1>{title}</h1> 
-                        <div>--</div>  
                         <CopyRoomCode  code={roomId}/>         
                     </div>
-                </Header>
+                </Header>                    
                 
                 <main>
                     <ReactScrollableFeed className="question-list">
@@ -122,61 +130,75 @@ export function Room() {
                                 <p>Envie o codigo da sala para seus amigos, e comece a trocar mensagens!</p>
                             </div>
 
-                        ) : questions.map(question => { 
-                            return (
+                        ) : 
+                            questions.map(question => 
+
                                 <QuestionArea 
                                     key={question.id}
+                                    id={question.id}
                                     content={question.content}
                                     author={question.author}
                                     isAnswer={question.isAnswer}
                                     isHighlighted={question.isHighlighted}
+                                    response={question.response}
+                                    responseId={question.responseId}
                                 >
-                                    {!question.isAnswer && 
-                                    <>  
-                                        {question.author.name === user?.name && 
-                                            <Tooltip title="Apagar mensagem">
-                                                <CgTrash size={25} className="trash" onClick={() => setQuestionFunction(question.id)}/>
-                                            </Tooltip>
-                                        }           
-
+                                     
+                                             
                                         <button 
                                             onClick={() => hadleLikeQuestion(question.id, question.likeId)} 
                                             className={`like-button ${question.likeId ? 'liked' : ''}`} 
                                             type="button" 
                                             aria-label="marcar como gostei"
                                         >
-                                        
-                                        <Tooltip title="Dar amei">
-                                            <AiOutlineHeart size={25}/>
-                                        </Tooltip>
-                                            {question.likeCount > 0 && <span>{question.likeCount}</span>}
+                                            {question.likeId ?
+                                                <Tooltip title={`${question.likeCount} likes`}>                                                                  
+                                                    <AiFillLike size={25}/>                                         
+                                                </Tooltip>     
+                                            : 
+                                                <Tooltip title="Dar like">
+                                                    <AiOutlineLike size={25}/>
+                                                </Tooltip>   
+                                            }                         
                                         </button>
-                                    </>
-                                    }                            
+                                        
+                                        {user && 
+                                            <Tooltip title="Responder">
+                                                <BsArrow90DegLeft size={25} onClick={() => response(question.content, question.id)}/>
+                                            </Tooltip>
+                                        }                             
+
+                                        {question.author.name === user?.name && 
+                                            <Tooltip title="Apagar mensagem">
+                                                <CgTrash size={25} className="trash" onClick={() => setQuestionFunction(question.id)}/>
+                                            </Tooltip>
+                                        }                                                                
                                 </QuestionArea>
-                            )
-                        })}                   
+                            )}                   
                     </ReactScrollableFeed>
                 </main>
 
-                <section>             
+                <section>     
+                    {respondendo !== '' && <span><span onClick={() => setRespondendo('')}>x</span>{respondendo}</span>} 
                     <form onSubmit={handleSendQuestion}>
+                        
                         { user ? (
                             <img src={user.avatar} alt={user.id}/>
                         ) : (
-                            <p>Para enviar uma mensagem, <button onClick={newLogin}>Faça seu login</button></p>
-                        )}                  
-
+                            <>{theme.title === 'light' ? <img src={iconligh} alt="Seu avatar" /> : <img src={icon} alt="Seu avatar" />}</>
+                        )}                             
+                                              
                         <input 
-                        onChange={event => setNewQuestion(event.target.value)}
-                        value={newQuestion}
-                        placeholder="Envie uma mensagem..."
-                        />
+                            onChange={event => setNewQuestion(event.target.value)}
+                            value={newQuestion}
+                            placeholder="Envie uma mensagem..."
+                        />                    
 
                         <Button type="submit" disabled={!user}><AiOutlineCheck/></Button>        
                     </form>
                 </section>
             </Conteudo>
+
             <SideBar/>
         </Container>
 
