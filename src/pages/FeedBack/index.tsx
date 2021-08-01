@@ -65,10 +65,6 @@ export const FeedBack = () => {
             setFeedback(parsedQuestions);
             
         })
-
-        return () => {
-            unsubscribe();
-        }
     }, []);
     
     return (
@@ -111,7 +107,3 @@ export const FeedBack = () => {
     </>
     )
 };
-
-function unsubscribe() {
-    throw new Error("Function not implemented.");
-}

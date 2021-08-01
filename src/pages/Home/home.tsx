@@ -31,10 +31,6 @@ export function Home() {
 
     useEffect( () => {
         if (user) toast.success(`Seja bem vindo, ${user?.name}`, styledToast)
-
-        return () => {
-            unsubscribe();
-        }
     }, [user, styledToast]);
 
     async function createNewRoom() {
@@ -109,8 +105,4 @@ export function Home() {
             </main>
         </Container>
     )
-}
-
-function unsubscribe() {
-    throw new Error('Function not implemented.');
 }

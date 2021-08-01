@@ -47,10 +47,6 @@ export function AdminRoom() {
             console.log(user?.id);
             console.log(authorId);
         }
-
-        return () => {
-            unsubscribe();
-        }
     },[user?.id, authorId, history])
 
     async function handleDeleteQuestion(questionId: string) {
@@ -166,7 +162,3 @@ export function AdminRoom() {
         </Container>
     )
 };
-
-function unsubscribe() {
-    throw new Error('Function not implemented.');
-}
