@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Container } from './styles';
 
-import { BsArrow90DegRight } from 'react-icons/bs';
+import { ArrowRight } from '../../styles/Icons/icons';
 
 type QuestionProps = {
     content: string;
@@ -22,7 +22,7 @@ export function QuestionArea({content, author, children, isHighlighted = false, 
     <>
         <Container className={`${isHighlighted ? 'highlighted' : ''} ${isAnswer ? 'answer' : ''}`} id={id}>
 
-            {response ? <a href={`#${responseId}`} className="response"><BsArrow90DegRight/> <div>{response}</div></a>: null}
+            {response ? <a href={`#${responseId}`} className="response"><ArrowRight/> <div>{response}</div></a>: null}
 
             {content.includes('http://') || content.includes('https://') ? 
                 <a href={content} rel="noreferrer" target="_blank">{content}</a> 

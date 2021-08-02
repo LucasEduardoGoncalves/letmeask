@@ -1,24 +1,39 @@
 import { useState, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
-
-import { Container } from './styled';
-import { FeedBack, FeedBackHelp, Trash } from '../../styles/ModalStyles';
 
 import { Modal } from '../Modal';
 import icon from '../../assets/iconDark.svg';
 import iconligh from '../../assets/icon.svg';
 
-import { FiSun, FiMoon, FiAlertTriangle } from 'react-icons/fi';
-import { RiFeedbackLine, RiArrowDropLeftLine } from 'react-icons/ri';
-import { BiMessageRoundedCheck, BiLogOut, BiLogIn } from 'react-icons/bi';
-import { CgFeed } from 'react-icons/cg';
-import { IoReturnDownBack, IoExitOutline } from 'react-icons/io5';
-
 import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/auth';
 
 import { database } from '../../services/firebase';
+
+import { 
+    Sun, 
+    Moon, 
+    AlertTriangle, 
+    FeedbackLine, 
+    MinorSign, 
+    MessageCheck, 
+    Logout, 
+    Login, 
+    Feed, 
+    ReturnDownBack, 
+    ExitOutline 
+} from '../../styles/Icons/icons';
+
+import { 
+    Container,
+    Header,
+    Main,
+    FeedBack as FeedBackButton,
+} from './styled';
+
+import toast, { Toaster } from 'react-hot-toast';
+
+import { FeedBack, FeedBackHelp, Trash } from '../../styles/ModalStyles';
 
 export const SideBar = () => {
     const { user, signOut, signInWithGoogle } = useAuth();
@@ -95,53 +110,53 @@ export const SideBar = () => {
         <Toaster/>
         <Container>
             <div className="arrow">
-                <RiArrowDropLeftLine/>         
+                <MinorSign/>         
             </div>
 
             {user ? 
-                <header>
+                <Header>
                     <img src={user.avatar} alt="Seu avatar" />
                     <h4>{user.name}</h4>              
-                </header> 
+                </Header> 
             : 
-                <header>
+                <Header>
                     {theme.title === 'light' ? <img src={iconligh} alt="Seu avatar" /> : <img src={icon} alt="Seu avatar" />}
                     <h4>Usuario não logado</h4>              
-                </header>
+                </Header>
             }
 
-            <main>  
+            <Main>  
                 <button onClick={toggleTheme}>
-                    {theme.title === 'dark' ? <FiMoon/> : <FiSun/>}
+                    {theme.title === 'dark' ? <Moon/> : <Sun/>}
                     Temas
                 </button>
 
                 {user ? 
                     <div onClick={toggleModalLogout}>
-                        <BiLogOut/>
+                        <Logout/>
                         Logout
                     </div> : 
                     <div onClick={signInWithGoogle}>
-                        <BiLogIn/>
+                        <Login/>
                         Login
                     </div>
                 }
 
                 <div onClick={toggleModalHome}>
-                    <IoReturnDownBack/>
+                    <ReturnDownBack/>
                     Home
                 </div>
 
-                <button className="feedback" disabled={!user} onClick={toggleModalFeedBack}>
-                    <RiFeedbackLine/>
+                <FeedBackButton className="feedback" disabled={!user} onClick={toggleModalFeedBack}>
+                    <FeedbackLine/>
                     FeedBack
-                </button> 
-            </main>
+                </FeedBackButton> 
+            </Main>
         </Container>
 
         <Modal isOpen={modalHome} onClose={toggleModalHome}>
             <Trash>
-            <IoReturnDownBack/>
+            <ReturnDownBack/>
                 <h2>Va para a home</h2>
                 <p>Tem certeza que quer voltar para a home?</p>
                 <div>
@@ -153,7 +168,7 @@ export const SideBar = () => {
 
         <Modal isOpen={modalLogout} onClose={toggleModalLogout}>
             <Trash>
-            <IoExitOutline/>
+            <ExitOutline/>
                 <h2>Logout</h2>
                 <p>Tem certeza que quer deslogar sua conta?</p>
                 <div>
@@ -166,14 +181,14 @@ export const SideBar = () => {
         <Modal isOpen={modalFeedBack} onClose={toggleModalFeedBack}>
             <FeedBack>
                 <div>
-                    <BiMessageRoundedCheck/>
+                    <MessageCheck/>
                     <div onClick={toggleModalFeedBackTanks}>
                         <h2>Ajude-nos a melhorar o LetMeAsk</h2>
                         <p>De um feedback sobre sua experiencia.</p>
                     </div>                   
                 </div>
                 <div onClick={toggleModalFeedBackHelp}>
-                    <FiAlertTriangle/>
+                    <AlertTriangle/>
                     <div>
                         <h2>Ocorreu um erro</h2>
 
@@ -182,7 +197,7 @@ export const SideBar = () => {
                 </div>
                 {user?.id === "37ODF6TglmWJvbuRh6n5rel6I263" && 
                     <Link to="/feedback">
-                        <CgFeed/>
+                        <Feed/>
                         <div>
                             <h2>FeedBack recebidos</h2>
                             <p>Confira os novos feedbacks, {user.name}!</p>

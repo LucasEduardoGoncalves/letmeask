@@ -1,4 +1,4 @@
-import { BiCopy } from 'react-icons/bi';
+import { Copy } from '../../styles/Icons/icons';
 import { Container } from './styles';
 
 import { useTheme } from '../../hooks/useTheme';
@@ -36,7 +36,7 @@ export function CopyRoomCode (props: RoomCodeProps) {
         <>
             <Container onClick={copyRoomCodeToClipeBoard}>      
                 <div>
-                    <BiCopy size={25} />
+                    <Copy size={25} />
                 </div>
                 <span>{props.code}</span>
             </Container>

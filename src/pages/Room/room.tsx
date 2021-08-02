@@ -8,13 +8,15 @@ import iconligh from '../../assets/icon.svg';
 import logoimg from '../../assets/logoLigth.svg';
 import logoimgDark from '../../assets/logoDark.svg';
 
+import { Delete } from '../../styles/Icons/icons';
+
 import { AiOutlineCheck, AiOutlineLike, AiFillLike } from 'react-icons/ai';
 import { BiMessageSquareDetail } from 'react-icons/bi';
 import { BsArrow90DegLeft } from 'react-icons/bs';
 import { TiDeleteOutline } from 'react-icons/ti'
 import { CgTrash } from 'react-icons/cg';
 
-import { Container, Header, Conteudo } from './styles';
+import { Container, Header, Conteudo, ResponseQuestion } from './styles';
 import { Trash } from '../../styles/ModalStyles'
 
 import { Button } from '../../components/Button'
@@ -174,12 +176,18 @@ export function Room() {
                                             </Tooltip>
                                         }                                                                
                                 </QuestionArea>
-                            )}                   
-                    </ReactScrollableFeed>
+                               
+                            )}     
+                        {respondendo !== '' && 
+                            <ResponseQuestion>
+                                <Delete onClick={() => setRespondendo('')}/>
+                                {respondendo}
+                            </ResponseQuestion>
+                            }
+                </ReactScrollableFeed>
                 </main>
 
-                <section>     
-                    {respondendo !== '' && <span><span onClick={() => setRespondendo('')}>x</span>{respondendo}</span>} 
+                <section>      
                     <form onSubmit={handleSendQuestion}>
                         
                         { user ? (

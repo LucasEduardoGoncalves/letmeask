@@ -13,118 +13,6 @@ export const Container = styled.div`
 
     transition: width 0.3s;
 
-    &:hover {
-        width: 18rem;
-
-        .arrow {
-        position: fixed;
-        display: flex;
-        align-items: center;
-        opacity: 0;
-        top: 50%;
-    }
-
-    .feedback {
-        &:hover {
-            background: #ccc;
-        }
-
-        &:not(:disabled):hover {
-            color: ${props => props.theme.sideBar.colorText};
-            text-decoration: none;
-            background: transparent;
-
-            display: flex;
-            align-items: center;
-            width: 100%;
-
-            padding: 0 1rem;
-            margin: 0.1rem 0;
-
-            font-size: 1rem;
-
-            border: 0;
-
-            svg {
-                color: ${props => props.theme.sideBar.colorText};
-                margin: 0 0.5rem;
-            }
-
-            &:hover {
-                background-color: ${props => props.theme.sideBar.hover.background};
-                color: ${props => props.theme.sideBar.hover.colorText};
-
-                border-right: 0.5rem solid ${props => props.theme.sideBar.background};
-
-                svg {
-                    color: ${props => props.theme.sideBar.hover.colorText};
-                }
-            }
-        }  
-    }
-
-        header {
-            opacity: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            margin: 2rem 0;
-
-            img {             
-                margin: 1rem 2rem;
-
-                height: 6.5rem;
-                border-radius: 50%;
-            }
-        }
-
-        main {
-            display: block;
-            line-height: 3rem;
-            width: 100%;
-            
-
-            button {
-                height: 3rem;
-            }
-            
-            div, a, button{
-                opacity: 1;
-                color: ${props => props.theme.sideBar.colorText};
-                text-decoration: none;
-                background: transparent;
-
-                display: flex;
-                align-items: center;
-                width: 100%;
-
-                padding: 0 1rem;
-                margin: 0.1rem 0;
-
-                font-size: 1rem;
-
-                border: 0;
-
-                svg {
-                    color: ${props => props.theme.sideBar.colorText};
-                    margin: 0 0.5rem;
-                }
-
-                &:hover {
-                    background-color: ${props => props.theme.sideBar.hover.background};
-                    color: ${props => props.theme.sideBar.hover.colorText};
-
-                    border-right: 0.5rem solid ${props => props.theme.sideBar.background};
-
-                    svg {
-                        color: ${props => props.theme.sideBar.hover.colorText};
-                    }
-                }
-            }
-        }
-    }
-
     .arrow {
         position: fixed;
         display: flex;
@@ -134,26 +22,112 @@ export const Container = styled.div`
         font-size: 2rem;
     }
 
-    header {
+    header, main {
         opacity: 0;
-        transition: opacity 0.3s;
+        transition: opacity 0.2s;
+    }
+
+    &:hover {
+        width: 18rem;
+
+        .arrow {
+            display: none;
+        }
+
+        header, main {
+            opacity: 1;
+        }
+    } 
+`;
+
+export const Header = styled.header`
+    transition: opacity 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 2rem 0;
+
+    img {             
+        margin: 1rem 2rem;
+
+        height: 6.5rem;
+        border-radius: 50%;
+    }
+`;
+
+export const Main = styled.main`
+    display: block;
+    line-height: 3rem;
+    width: 100%;
+    
+    button {
+        height: 3rem;
+    }
+    
+    div, a, button {
+        color: ${props => props.theme.sideBar.colorText};
+        text-decoration: none;
+        background: transparent;
 
         display: flex;
-        flex-direction: column;
         align-items: center;
+        width: 100%;
 
-        margin: 2rem 0;
+        padding: 0 1rem;
+        margin: 0.1rem 0;
 
-        img {             
-            margin: 1rem 2rem;
+        font-size: 1rem;
 
-            height: 6.5rem;
-            border-radius: 50%;
+        border: 0;
+
+        svg {
+            color: ${props => props.theme.sideBar.colorText};
+            margin: 0 0.5rem;
+        }
+
+        &:hover {
+            background-color: ${props => props.theme.sideBar.hover.background};
+            color: ${props => props.theme.sideBar.hover.colorText};
+
+            border-right: 0.5rem solid ${props => props.theme.sideBar.background};
+
+            svg {
+                color: ${props => props.theme.sideBar.hover.colorText};
+            }
         }
     }
+`;
 
-    div, a, button {
-        opacity: 0;  
+export const FeedBack = styled.button`  
+    color: ${props => props.theme.sideBar.colorText};
+    text-decoration: none;
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    padding: 0 1rem;
+    margin: 0.1rem 0;
+
+    font-size: 1rem;
+
+    border: 0;
+
+    svg {
+        color: ${props => props.theme.sideBar.colorText};
+        margin: 0 0.5rem;
     }
 
+    &:hover {
+        background-color: ${props => props.theme.sideBar.hover.background};
+        color: ${props => props.theme.sideBar.hover.colorText};
+
+        border-right: 0.5rem solid ${props => props.theme.sideBar.background};
+
+        svg {
+            color: ${props => props.theme.sideBar.hover.colorText};
+        }
+    }      
 `;

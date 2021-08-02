@@ -195,38 +195,20 @@ export const Conteudo = styled.main`
             }
         }
     }
+`;
 
-    /* @media (max-width: 1000px){
-        max-width: 60rem;
+export const ResponseQuestion = styled.div`
+    display: flex;
+    align-items: center;
 
-        .question-list{
-            max-width: 18rem;
+    width: 100%;
+    max-width: 45rem;
 
-            .emptyQuestion {
+    padding-top: 1rem;
+    padding-left: 4rem;
 
-                svg { 
-                    font-size: 2rem;
-                }
-
-                p {
-                    display: none;
-                }
-            }
-        }
-
-        > section {
-            form {
-                margin: 1rem;
-                gap: 0.5rem;
-                img {
-                    height: 3rem;
-                    width: 3rem;
-                }
-
-                input {
-                    height: 3rem;
-                }
-            }
-        }
-    } */
+    svg {
+        font-size: 2rem;
+        margin-right: 1rem;
+    }
 `;
